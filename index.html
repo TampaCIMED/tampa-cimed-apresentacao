@@ -1,0 +1,2776 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tampa Batoque Híbrida CIMED — Apresentação de Conceito</title>
+
+  <!-- Fontes Premium -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       1. SISTEMA DE DESIGN & VARIÁVEIS (TEMAS)
+       ========================================================================== */
+    :root {
+      /* Tema Padrão */
+      --bg-gradient: linear-gradient(135deg, #070b13 0%, #0d1527 50%, #15223c 100%);
+      --bg-color: #080d1a;
+      --panel-bg: rgba(13, 22, 41, 0.7);
+      --panel-border: rgba(59, 130, 246, 0.15);
+      --panel-border-glow: rgba(59, 130, 246, 0.3);
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --accent: #3b82f6;
+      --accent-hover: #60a5fa;
+      --accent-glow: rgba(59, 130, 246, 0.4);
+      --success: #10b981;
+      --success-glow: rgba(16, 185, 129, 0.4);
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --hud-active-bg: rgba(16, 185, 129, 0.1);
+      --hud-active-border: #10b981;
+      --card-gradient: linear-gradient(135deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0.8) 100%);
+      --font-title: 'Outfit', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --transition-speed: 0.4s;
+    }
+
+    /* Tema Cyber Dark */
+    [data-theme="cyber-dark"] {
+      --bg-gradient: linear-gradient(135deg, #000000 0%, #080808 60%, #121212 100%);
+      --bg-color: #050505;
+      --panel-bg: rgba(10, 10, 10, 0.85);
+      --panel-border: rgba(16, 185, 129, 0.2);
+      --panel-border-glow: rgba(16, 185, 129, 0.45);
+      --text-primary: #ffffff;
+      --text-secondary: #a3a3a3;
+      --text-muted: #525252;
+      --accent: #10b981;
+      --accent-hover: #34d399;
+      --accent-glow: rgba(16, 185, 129, 0.5);
+      --success: #059669;
+      --hud-active-bg: rgba(16, 185, 129, 0.15);
+      --hud-active-border: #10b981;
+      --card-gradient: linear-gradient(180deg, rgba(15, 15, 15, 0.9) 0%, rgba(5, 5, 5, 0.95) 100%);
+    }
+
+    /* Tema Cimed Corporate (Navy + Yellow) */
+    [data-theme="cimed"] {
+      --bg-gradient: linear-gradient(135deg, #020617 0%, #0b132b 60%, #1c2541 100%);
+      --bg-color: #050b1a;
+      --panel-bg: rgba(15, 23, 42, 0.8);
+      --panel-border: rgba(254, 240, 138, 0.15);
+      --panel-border-glow: rgba(250, 204, 21, 0.4);
+      --text-primary: #f8fafc;
+      --text-secondary: #cbd5e1;
+      --text-muted: #64748b;
+      --accent: #facc15;
+      --accent-hover: #fde047;
+      --accent-glow: rgba(250, 204, 21, 0.35);
+      --success: #10b981;
+      --hud-active-bg: rgba(250, 204, 21, 0.1);
+      --hud-active-border: #facc15;
+      --card-gradient: linear-gradient(135deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.9) 100%);
+    }
+
+    /* Tema CIMED Amarelo */
+    [data-theme="cimed-yellow"] {
+      --bg-gradient: linear-gradient(135deg, #fff7cc 0%, #fde68a 50%, #facc15 100%);
+      --bg-color: #fffbeb;
+      --panel-bg: rgba(255, 251, 235, 0.85);
+      --panel-border: rgba(250, 204, 21, 0.5);
+      --panel-border-glow: rgba(250, 204, 21, 0.6);
+      --text-primary: #0b132b;
+      --text-secondary: #334155;
+      --text-muted: #64748b;
+      --accent: #020617;
+      --accent-hover: #0b132b;
+      --accent-glow: rgba(250, 204, 21, 0.5);
+      --success: #059669;
+      --warning: #b45309;
+      --hud-active-bg: rgba(250, 204, 21, 0.35);
+      --hud-active-border: #f59e0b;
+      --card-gradient: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(254, 240, 138, 0.9) 100%);
+    }
+
+    /* Tema Light Premium */
+    [data-theme="light-tech"] {
+      --bg-gradient: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 50%, #cbd5e1 100%);
+      --bg-color: #f8fafc;
+      --panel-bg: rgba(255, 255, 255, 0.75);
+      --panel-border: rgba(148, 163, 184, 0.3);
+      --panel-border-glow: rgba(59, 130, 246, 0.25);
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #94a3b8;
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --accent-glow: rgba(37, 99, 235, 0.2);
+      --success: #059669;
+      --hud-active-bg: rgba(37, 99, 235, 0.08);
+      --hud-active-border: #2563eb;
+      --card-gradient: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(241, 245, 249, 0.9) 100%);
+    }
+
+    /* ==========================================================================
+       2. ESTILOS GERAIS & RESET
+       ========================================================================== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+
+    body {
+      background: var(--bg-gradient);
+      background-attachment: fixed;
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: var(--font-title);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font-family: inherit;
+      color: inherit;
+      background: none;
+      border: none;
+      outline: none;
+    }
+
+    /* Scrollbar Estilizada */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--panel-border);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent);
+    }
+
+    /* ==========================================================================
+       3. ESTRUTURA E LAYOUT PRINCIPAL
+       ========================================================================== */
+    .app-container {
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      grid-template-rows: auto 1fr;
+      /* sem linha extra para nav */
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+      position: relative;
+      transition: grid-template-columns 0.3s ease;
+    }
+
+    .app-container.fullscreen {
+      grid-template-columns: 1fr 0px;
+    }
+
+    /* Header */
+    header {
+      grid-column: 1 / -1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 24px;
+      background: rgba(8, 13, 26, 0.4);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--panel-border);
+      z-index: 10;
+    }
+
+    .sidebar {
+      display: none !important;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-circle {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--success) 100%);
+      box-shadow: 0 0 12px var(--accent-glow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: #fff;
+      font-size: 14px;
+      font-family: var(--font-title);
+    }
+
+    .logo-title h1 {
+      font-size: 18px;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--text-primary) 30%, var(--accent-hover) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .logo-title p {
+      font-size: 10px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-top: 1px;
+    }
+
+    .top-controls {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    /* Botões Padrão */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--panel-border);
+      color: var(--text-secondary);
+    }
+
+    .btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--text-primary);
+      border-color: var(--accent);
+      box-shadow: 0 0 8px rgba(59, 130, 246, 0.15);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      border-color: var(--accent-hover);
+      color: #fff;
+      box-shadow: 0 0 14px var(--accent-glow);
+    }
+
+    .btn-danger {
+      background: rgba(239, 68, 68, 0.1);
+      border-color: rgba(239, 68, 68, 0.2);
+      color: var(--danger);
+    }
+
+    .btn-danger:hover {
+      background: var(--danger);
+      border-color: var(--danger);
+      color: #fff;
+      box-shadow: 0 0 10px rgba(239, 68, 68, 0.3);
+    }
+
+    .btn-icon {
+      padding: 8px;
+      border-radius: 8px;
+      aspect-ratio: 1;
+    }
+
+    .switch-mode {
+      display: flex;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--panel-border);
+      padding: 4px;
+      border-radius: 10px;
+    }
+
+    .switch-btn {
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-secondary);
+    }
+
+    .switch-btn.active {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 2px 8px var(--accent-glow);
+    }
+
+    /* Selector de Temas */
+    .theme-select-container {
+      position: relative;
+    }
+
+    .theme-select {
+      appearance: none;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--panel-border);
+      padding: 8px 32px 8px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      color: var(--text-secondary);
+    }
+
+    .theme-select:hover {
+      border-color: var(--accent);
+      color: var(--text-primary);
+    }
+
+    .theme-select-container::after {
+      content: '▼';
+      font-size: 8px;
+      color: var(--text-muted);
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    /* ==========================================================================
+       4. SIDEBAR - NAVEGAÇÃO DOS SLIDES
+       ========================================================================== */
+    .sidebar {
+      background: rgba(8, 13, 26, 0.35);
+      border-right: 1px solid var(--panel-border);
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      z-index: 5;
+      transition: transform 0.3s ease, width 0.3s ease;
+    }
+
+    .app-container.fullscreen .sidebar {
+      transform: translateX(-100%);
+      width: 0;
+      overflow: hidden;
+      border-right: none;
+    }
+
+    .sidebar-header {
+      padding: 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .sidebar-header h3 {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+
+    .slide-list {
+      list-style: none;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .slide-item {
+      padding: 10px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 1px solid transparent;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .slide-item:hover {
+      background: rgba(255, 255, 255, 0.03);
+      border-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .slide-item.active {
+      background: rgba(59, 130, 246, 0.08);
+      border-color: var(--panel-border-glow);
+      box-shadow: inset 0 0 8px rgba(59, 130, 246, 0.05);
+    }
+
+    .slide-number {
+      font-family: var(--font-title);
+      font-weight: 700;
+      font-size: 12px;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 4px;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .slide-item.active .slide-number {
+      color: var(--accent);
+      background: rgba(59, 130, 246, 0.15);
+    }
+
+    .slide-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .slide-title-thumb {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .slide-item.active .slide-title-thumb {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .slide-image-thumb-name {
+      font-size: 10px;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* ==========================================================================
+       5. ÁREA CENTRAL DE CONTEÚDO (APRESENTAÇÃO)
+       ========================================================================== */
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      padding: 16px 32px 0 32px;
+      overflow: hidden;
+      position: relative;
+      background: radial-gradient(circle at 50% 30%, rgba(59, 130, 246, 0.04) 0%, transparent 70%);
+      align-items: center;
+    }
+
+    .slide-stage {
+      width: 100%;
+      max-width: 1100px;
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 28px;
+      align-items: start;
+      position: relative;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    /* Efeito de Transição do Slide */
+    .slide-stage.fade-in {
+      animation: slideFadeIn var(--transition-speed) cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .slide-stage.slide-left {
+      animation: slideSlideLeft var(--transition-speed) cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .slide-stage.slide-up {
+      animation: slideSlideUp var(--transition-speed) cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes slideFadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideSlideLeft {
+      from {
+        opacity: 0;
+        transform: translateX(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes slideSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Lado Esquerdo: Bloco de Imagem */
+    .image-container {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid var(--panel-border);
+      box-shadow: 0 12px 40px -10px rgba(0, 0, 0, 0.5);
+      aspect-ratio: 1;
+      max-height: calc(100vh - 200px);
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-in;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .image-container:hover {
+      border-color: var(--panel-border-glow);
+      box-shadow: 0 16px 48px -8px rgba(0, 0, 0, 0.6), 0 0 20px rgba(59, 130, 246, 0.05);
+    }
+
+    .slide-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .image-container:hover .slide-img {
+      transform: scale(1.02);
+    }
+
+    /* Marca D'Água / Tag de Render */
+    .render-badge {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      padding: 6px 12px;
+      border-radius: 6px;
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 8px var(--success-glow);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        opacity: 0.5;
+      }
+
+      50% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0.5;
+      }
+    }
+
+    .btn-expand-image {
+      position: absolute;
+      bottom: 16px;
+      right: 16px;
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-secondary);
+      padding: 8px;
+      border-radius: 8px;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(5px);
+      transition: all 0.2s ease;
+    }
+
+    .image-container:hover .btn-expand-image {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .btn-expand-image:hover {
+      color: var(--text-primary);
+      background: rgba(15, 23, 42, 0.95);
+      border-color: var(--accent);
+    }
+
+    /* Lado Direito: Cartão de Informações */
+    .content-card {
+      background: var(--card-gradient);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--panel-border);
+      border-radius: 18px;
+      padding: 28px 30px;
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+      overflow-y: auto;
+      overflow-x: hidden;
+      min-height: 0;
+      max-height: calc(100vh - 160px);
+      justify-content: flex-start;
+    }
+
+    .content-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--accent) 0%, var(--success) 100%);
+    }
+
+    .slide-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .slide-subtitle {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .slide-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.25;
+    }
+
+    .slide-bullets {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .bullet-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13px;
+      line-height: 1.45;
+      color: var(--text-secondary);
+    }
+
+    .bullet-icon {
+      margin-top: 4px;
+      color: var(--success);
+      flex-shrink: 0;
+    }
+
+    .bullet-text strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .slide-notes-box {
+      margin-top: auto;
+      padding: 14px 16px;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 8px;
+      border-left: 3px solid var(--warning);
+      font-size: 12px;
+      line-height: 1.5;
+      color: var(--text-secondary);
+    }
+
+    .slide-notes-title {
+      font-weight: 700;
+      color: var(--text-primary);
+      text-transform: uppercase;
+      font-size: 10px;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Barra de Navegação Inferior — agora dentro do main-content */
+    .nav-bar {
+      width: 100%;
+      max-width: 1100px;
+      padding: 10px 0 12px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      border-top: 1px solid var(--panel-border);
+      flex-shrink: 0;
+      margin-top: 10px;
+    }
+
+    .app-container.fullscreen .nav-bar {
+      padding: 10px 0;
+    }
+
+    .nav-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .slideshow-controls {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--panel-border);
+      padding: 4px 12px;
+      border-radius: 30px;
+    }
+
+    .slideshow-speed {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .slideshow-speed input {
+      width: 60px;
+      cursor: pointer;
+      accent-color: var(--accent);
+    }
+
+    .progress-bar-container {
+      flex-grow: 1;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.05);
+      margin: 0 32px;
+      border-radius: 2px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(to right, var(--accent), var(--success));
+      transition: width 0.3s ease;
+    }
+
+    .progress-bar-autoplay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 2px;
+      background: var(--warning);
+      width: 0%;
+    }
+
+    .slide-counter {
+      font-family: var(--font-title);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      background: rgba(255, 255, 255, 0.03);
+      padding: 4px 10px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    /* ==========================================================================
+       6. HUD TÉCNICO (DETALHAMENTO CAD)
+       ========================================================================== */
+    .hud-panel {
+      background: rgba(8, 13, 26, 0.4);
+      border-left: 1px solid var(--panel-border);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      overflow-y: auto;
+      z-index: 5;
+      transition: transform 0.3s ease, width 0.3s ease;
+    }
+
+    .app-container.fullscreen .hud-panel {
+      transform: translateX(100%);
+      width: 0;
+      overflow: hidden;
+      border-left: none;
+    }
+
+    .hud-header {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      padding-bottom: 12px;
+    }
+
+    .hud-header h3 {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hud-header p {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .hud-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .hud-card {
+      background: rgba(255, 255, 255, 0.015);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      border-radius: 10px;
+      padding: 12px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+
+    .hud-card.active {
+      background: var(--hud-active-bg);
+      border-color: var(--hud-active-border);
+      box-shadow: 0 0 12px rgba(16, 185, 129, 0.1);
+      transform: scale(1.02);
+    }
+
+    .hud-label-group {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .hud-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .hud-card.active .hud-label {
+      color: var(--success);
+      /* Se for tema Cimed, muda cor de destaque para yellow */
+    }
+
+    [data-theme="cimed"] .hud-card.active .hud-label {
+      color: var(--accent);
+    }
+
+    [data-theme="cimed-yellow"] .hud-card.active .hud-label {
+      color: var(--accent);
+    }
+
+    [data-theme="light-tech"] .hud-card.active .hud-label {
+      color: var(--accent);
+    }
+
+    .hud-desc {
+      font-size: 11px;
+      color: var(--text-secondary);
+    }
+
+    .hud-card.active .hud-desc {
+      color: var(--text-primary);
+    }
+
+    .hud-value {
+      font-family: var(--font-title);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-secondary);
+      background: rgba(255, 255, 255, 0.02);
+      padding: 4px 8px;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .hud-card.active .hud-value {
+      color: var(--text-primary);
+      background: rgba(16, 185, 129, 0.1);
+      border-color: var(--hud-active-border);
+      text-shadow: 0 0 8px rgba(16, 185, 129, 0.2);
+    }
+
+    [data-theme="cimed"] .hud-card.active .hud-value {
+      background: rgba(250, 204, 21, 0.1);
+    }
+
+    [data-theme="cimed-yellow"] .hud-card.active .hud-value {
+      background: rgba(250, 204, 21, 0.35);
+    }
+
+    [data-theme="light-tech"] .hud-card.active .hud-value {
+      background: rgba(37, 99, 235, 0.1);
+    }
+
+    .hud-footer {
+      margin-top: auto;
+      padding: 12px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      font-size: 11px;
+      line-height: 1.5;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .hud-footer-title {
+      font-weight: 700;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      font-size: 9px;
+      letter-spacing: 0.05em;
+    }
+
+    /* ==========================================================================
+       7. PAINEL EDITOR (ABERTO À DIREITA NO LUGAR DO HUD)
+       ========================================================================== */
+    .editor-panel {
+      grid-column: 3 / 4;
+      background: rgba(13, 20, 35, 0.95);
+      backdrop-filter: blur(20px);
+      border-left: 1px solid var(--panel-border);
+      display: none;
+      flex-direction: column;
+      z-index: 5;
+      box-shadow: -10px 0 30px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+    }
+
+    .app-container.editor-active .editor-panel {
+      display: flex;
+    }
+
+    .app-container.editor-active .hud-panel {
+      display: none;
+    }
+
+    .editor-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    .editor-header h3 {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .editor-scroll {
+      flex-grow: 1;
+      overflow-y: auto;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    .form-control {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--panel-border);
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 13px;
+      color: var(--text-primary);
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+
+    .form-control:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 8px var(--accent-glow);
+    }
+
+    textarea.form-control {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .bullets-editor-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .bullet-edit-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .bullet-edit-row input {
+      flex-grow: 1;
+    }
+
+    .hud-tag-selector {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      padding: 8px;
+      background: rgba(0, 0, 0, 0.15);
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .hud-tag-checkbox {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      cursor: pointer;
+      color: var(--text-secondary);
+      padding: 4px;
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+
+    .hud-tag-checkbox:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .hud-tag-checkbox input {
+      cursor: pointer;
+      accent-color: var(--accent);
+    }
+
+    .editor-actions-bottom {
+      padding: 16px 20px;
+      background: rgba(0, 0, 0, 0.25);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end;
+    }
+
+    .editor-slide-management {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .editor-slide-management h4 {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+
+    .management-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+
+    /* ==========================================================================
+       8. MODAL DE ZOOM / LIGHTBOX & MODAL DE AJUDA
+       ========================================================================== */
+    .lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(3, 7, 18, 0.95);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+    }
+
+    .lightbox-content {
+      position: relative;
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox-img {
+      max-width: 100%;
+      max-height: 85vh;
+      object-fit: contain;
+    }
+
+    .lightbox-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 16px 24px;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 500;
+      text-align: center;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #fff;
+      transition: all 0.2s;
+    }
+
+    .lightbox-close:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: scale(1.1);
+    }
+
+    /* Modal Genérico (Aviso / Ajuda) */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(6px);
+      z-index: 90;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      background: var(--bg-color);
+      border: 1px solid var(--panel-border);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      border-radius: 16px;
+      width: 90%;
+      max-width: 500px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+    }
+
+    .modal-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .modal-body {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .modal-body code {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      color: var(--accent-hover);
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: rgba(16, 185, 129, 0.95);
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 600;
+      box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+      z-index: 150;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      pointer-events: none;
+    }
+
+    .toast.active {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ==========================================================================
+       9. ESTILOS DE IMPRESSÃO (PDF EXPORT)
+       ========================================================================== */
+    /* Botões de Velocidade do Slideshow */
+    .slideshow-speed {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .slideshow-speed>span {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-right: 2px;
+    }
+
+    .speed-btn {
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--panel-border);
+      color: var(--text-secondary);
+      transition: all 0.2s ease;
+    }
+
+    .speed-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--text-primary);
+      border-color: var(--accent);
+    }
+
+    .speed-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+      box-shadow: 0 0 8px var(--accent-glow);
+    }
+
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        min-height: auto;
+      }
+
+      .app-container {
+        display: block !important;
+        height: auto !important;
+        width: auto !important;
+        overflow: visible !important;
+      }
+
+      header,
+      .sidebar,
+      .hud-panel,
+      .editor-panel,
+      .nav-bar,
+      .btn-expand-image,
+      .render-badge,
+      .lightbox,
+      .modal,
+      .toast {
+        display: none !important;
+      }
+
+      .main-content {
+        padding: 0 !important;
+        background: none !important;
+        display: block !important;
+        overflow: visible !important;
+      }
+
+      .slide-stage {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 30px !important;
+        width: 100% !important;
+        height: 100% !important;
+        page-break-after: always !important;
+        page-break-inside: avoid !important;
+        align-items: center !important;
+        padding: 40px !important;
+      }
+
+      /* Garante uma página por slide */
+      .slide-stage:not(.active) {
+        display: grid !important;
+        /* Mostra todos os slides na impressão */
+      }
+
+      .image-container {
+        border: 1px solid #ddd !important;
+        box-shadow: none !important;
+        background: #fff !important;
+        max-width: 450px !important;
+      }
+
+      .slide-img {
+        max-height: 450px !important;
+      }
+
+      .content-card {
+        background: #fff !important;
+        color: #000 !important;
+        border: 1px solid #ddd !important;
+        box-shadow: none !important;
+        min-height: auto !important;
+        padding: 20px !important;
+      }
+
+      .content-card::before {
+        background: #3b82f6 !important;
+        /* Cor sólida para o print */
+      }
+
+      .slide-title {
+        color: #000 !important;
+      }
+
+      .slide-subtitle {
+        color: #2563eb !important;
+      }
+
+      .bullet-item {
+        color: #333 !important;
+      }
+
+      .bullet-icon {
+        color: #059669 !important;
+      }
+
+      .bullet-text strong {
+        color: #000 !important;
+      }
+
+      .slide-notes-box {
+        border-left-color: #f59e0b !important;
+        background: #fbfbfb !important;
+        color: #444 !important;
+      }
+
+      .slide-notes-title {
+        color: #000 !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="app-container" id="appContainer">
+
+    <!-- HEADER -->
+    <header>
+      <div class="logo-area">
+        <div class="logo-circle">C</div>
+        <div class="logo-title">
+          <h1>Tampa Híbrida CIMED</h1>
+          <p>Apresentação Técnica de Conceito · CIMED</p>
+        </div>
+      </div>
+
+      <div class="top-controls">
+        <!-- Removido: botão Editor (versão cliente) -->
+
+        <!-- Seletor de Temas -->
+        <div class="theme-select-container">
+          <select class="theme-select" id="themeSelect" onchange="changeTheme(this.value)">
+            <option value="default">Padrão</option>
+            <option value="cyber-dark">Cyber Dark</option>
+            <option value="cimed">CIMED Corporate</option>
+            <option value="cimed-yellow">CIMED Amarelo</option>
+            <option value="light-tech">Light Premium</option>
+          </select>
+        </div>
+
+        <!-- Botões de Ação Global -->
+        <button class="btn" onclick="exportText()" title="Copiar texto formatado dos slides">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+          </svg>
+          Exportar Texto
+        </button>
+
+        <button class="btn" onclick="window.print()" title="Imprimir apresentação ou Salvar como PDF">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+            <rect x="6" y="14" width="12" height="8" />
+          </svg>
+          PDF
+        </button>
+
+        <button class="btn btn-primary" onclick="saveFile()"
+          title="Salva as edições permanentemente no arquivo index.html">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
+            <polyline points="17 21 17 13 7 13 7 21" />
+            <polyline points="7 3 7 8 15 8" />
+          </svg>
+          Salvar Arquivo
+        </button>
+
+        <button class="btn btn-icon" onclick="showHelp()" title="Ajuda / Atalhos">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+            <line x1="12" y1="17" x2="12.01" y2="17" />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <h3>Lista de Slides</h3>
+        <button class="btn btn-icon" style="padding: 4px; border: none; background: none;" onclick="toggleFullscreen()"
+          title="Ocultar Painéis / Tela Cheia (F)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="2" />
+            <path d="M9 3v18M15 3v18" />
+          </svg>
+        </button>
+      </div>
+      <ul class="slide-list" id="slideList">
+        <!-- Populado por JS -->
+      </ul>
+    </div>
+
+    <!-- CONTEÚDO PRINCIPAL (SLIDE STAGE) -->
+    <div class="main-content" id="mainContent">
+      <div class="slide-stage" id="slideStage">
+        <!-- Lado Esquerdo: Imagem -->
+        <div class="image-container" onclick="openZoom()" title="Clique para ampliar imagem">
+          <img src="" alt="Render CIMED" class="slide-img" id="slideImg">
+          <button class="btn-expand-image" onclick="event.stopPropagation(); openZoom();">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="15 3 21 3 21 9" />
+              <polyline points="9 21 3 21 3 15" />
+              <line x1="21" y1="3" x2="14" y2="10" />
+              <line x1="3" y1="21" x2="10" y2="14" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Lado Direito: Conteúdo do Slide -->
+        <div class="content-card" id="contentCard">
+          <div class="slide-meta">
+            <span class="slide-subtitle" id="slideSubtitle"></span>
+            <h2 class="slide-title" id="slideTitle"></h2>
+          </div>
+
+          <div class="slide-bullets" id="slideBullets">
+            <!-- Populados por JS -->
+          </div>
+
+          <div class="slide-notes-box" id="slideNotesBox">
+            <div class="slide-notes-title">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                <line x1="12" y1="9" x2="12" y2="13" />
+                <line x1="12" y1="17" x2="12.01" y2="17" />
+              </svg>
+              Observações / Engenharia
+            </div>
+            <span id="slideNotes"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- BARRA DE NAVEGAÇÃO: fica abaixo do conteúdo, dentro do main-content -->
+      <div class="nav-bar">
+        <!-- Prev / Counter / Next -->
+        <div class="nav-controls">
+          <button class="btn btn-icon" onclick="prevSlide()" title="Slide Anterior (Seta Esquerda)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+          </button>
+          <span class="slide-counter" id="slideCounter">1 / 11</span>
+          <button class="btn btn-icon" onclick="nextSlide()" title="Próximo Slide (Seta Direita / Espaço)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Barra de Progresso -->
+        <div class="progress-bar-container">
+          <div class="progress-bar-fill" id="progressBarFill"></div>
+          <div class="progress-bar-autoplay" id="progressBarAutoplay"></div>
+        </div>
+
+        <!-- Player + Velocidade -->
+        <div class="slideshow-controls">
+          <button class="btn btn-icon" id="btnPlayPause" onclick="toggleSlideshow()"
+            style="padding: 2px; border: none; background: none;" title="Iniciar/Pausar Slideshow (P)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              id="playPauseIcon">
+              <polygon points="5 3 19 12 5 21 5 3" />
+            </svg>
+          </button>
+          <div class="slideshow-speed">
+            <span>Intervalo:</span>
+            <button class="speed-btn" id="speed30" onclick="setAutoplaySpeed(30)">30s</button>
+            <button class="speed-btn active" id="speed60" onclick="setAutoplaySpeed(60)">60s</button>
+            <button class="speed-btn" id="speed120" onclick="setAutoplaySpeed(120)">120s</button>
+          </div>
+        </div>
+
+        <!-- Tela Cheia -->
+        <button class="btn btn-icon" onclick="toggleFullscreen()" title="Alternar Tela Cheia (F)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- HUD TÉCNICO -->
+    <div class="hud-panel">
+      <div class="hud-header">
+        <h3>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+            <line x1="9" y1="3" x2="9" y2="21" />
+            <line x1="15" y1="3" x2="15" y2="21" />
+            <line x1="3" y1="9" x2="21" y2="9" />
+            <line x1="3" y1="15" x2="21" y2="15" />
+          </svg>
+          Especificações CAD
+        </h3>
+        <p>Valores extraídos do modelo 3D</p>
+      </div>
+
+      <div class="hud-grid">
+        <div
+          style="font-size: 10px; text-transform: uppercase; color: var(--accent); font-weight: 700; letter-spacing: 0.05em; margin-top: 6px; margin-bottom: 2px; padding-left: 4px; border-left: 2px solid var(--accent);">
+          Parâmetros de Projeto (Adaptados)</div>
+
+        <div class="hud-card" id="hud-diac">
+          <div class="hud-label-group">
+            <span class="hud-label">Diâmetro Externo</span>
+            <span class="hud-desc">Região da saia lateral</span>
+          </div>
+          <span class="hud-value">13.5-15.5mm</span>
+        </div>
+
+        <div class="hud-card" id="hud-alt">
+          <div class="hud-label-group">
+            <span class="hud-label">Altura Total</span>
+            <span class="hud-desc">Incluindo cinta do lacre</span>
+          </div>
+          <span class="hud-value">7.5mm</span>
+        </div>
+
+        <div class="hud-card" id="hud-par">
+          <div class="hud-label-group">
+            <span class="hud-label">Espessura Parede</span>
+            <span class="hud-desc">Corpo externo principal</span>
+          </div>
+          <span class="hud-value">1.3mm</span>
+        </div>
+
+        <div class="hud-card" id="hud-nerv">
+          <div class="hud-label-group">
+            <span class="hud-label">Nervuras Pega</span>
+            <span class="hud-desc">Ranhuras de aderência</span>
+          </div>
+          <span class="hud-value">54</span>
+        </div>
+
+        <div class="hud-card" id="hud-pega-maior">
+          <div class="hud-label-group">
+            <span class="hud-label">Pega Maior (Indicador)</span>
+            <span class="hud-desc">Perfil triangular vazado</span>
+          </div>
+          <span class="hud-value">4x4x4mm</span>
+        </div>
+
+        <div class="hud-card" id="hud-pega-menor">
+          <div class="hud-label-group">
+            <span class="hud-label">Pega Menor (Polegar)</span>
+            <span class="hud-desc">Batente triangular (stop)</span>
+          </div>
+          <span class="hud-value">3x3x4mm</span>
+        </div>
+
+        <div class="hud-card" id="hud-diag">
+          <div class="hud-label-group">
+            <span class="hud-label">Ø Interno Gargalo</span>
+            <span class="hud-desc">Boca de acoplamento</span>
+          </div>
+          <span class="hud-value">8.7mm</span>
+        </div>
+
+        <div class="hud-card" id="hud-altu">
+          <div class="hud-label-group">
+            <span class="hud-label">Altura Útil</span>
+            <span class="hud-desc">Espaço interno livre</span>
+          </div>
+          <span class="hud-value">3.7mm</span>
+        </div>
+
+        <div class="hud-card" id="hud-pontes">
+          <div class="hud-label-group">
+            <span class="hud-label">Pontes do Lacre</span>
+            <span class="hud-desc">Pontos de ruptura axial</span>
+          </div>
+          <span class="hud-value">12</span>
+        </div>
+
+        <div
+          style="font-size: 10px; text-transform: uppercase; color: var(--success); font-weight: 700; letter-spacing: 0.05em; margin-top: 12px; margin-bottom: 2px; padding-left: 4px; border-left: 2px solid var(--success);">
+          Modelo 3D Blender (Ø15mm)</div>
+
+        <div class="hud-card" id="hud-bl-corpo">
+          <div class="hud-label-group">
+            <span class="hud-label">Ø Corpo (Blender)</span>
+            <span class="hud-desc">Valor de calibragem</span>
+          </div>
+          <span class="hud-value">15.00mm</span>
+        </div>
+
+        <div class="hud-card" id="hud-bl-abas">
+          <div class="hud-label-group">
+            <span class="hud-label">Ø com Abas (3D)</span>
+            <span class="hud-desc">Largura máxima</span>
+          </div>
+          <span class="hud-value">19.72mm</span>
+        </div>
+
+
+
+        <div class="hud-card" id="hud-bl-batoque">
+          <div class="hud-label-group">
+            <span class="hud-label">Ø Interno Batoque</span>
+            <span class="hud-desc">Mecanismo de vedação</span>
+          </div>
+          <span class="hud-value">9.00mm</span>
+        </div>
+
+        <div class="hud-card" id="hud-bl-altura">
+          <div class="hud-label-group">
+            <span class="hud-label">Altura no Modelo</span>
+            <span class="hud-desc">Escala de renderização</span>
+          </div>
+          <span class="hud-value">7.50mm</span>
+        </div>
+
+        <div
+          style="font-size: 10px; text-transform: uppercase; color: var(--success); font-weight: 700; letter-spacing: 0.05em; margin-top: 12px; margin-bottom: 2px; padding-left: 4px; border-left: 2px solid var(--success);">
+          Dados de Engenharia</div>
+
+        <div class="hud-card" id="hud-rosca-passo">
+          <div class="hud-label-group">
+            <span class="hud-label">Passo da Rosca</span>
+            <span class="hud-desc">Quick Thread (giro curto)</span>
+          </div>
+          <span class="hud-value">3,0 mm</span>
+        </div>
+
+        <div class="hud-card" id="hud-rosca-prof">
+          <div class="hud-label-group">
+            <span class="hud-label">Profundidade do Perfil</span>
+            <span class="hud-desc">Perfil da rosca interna</span>
+          </div>
+          <span class="hud-value">1,0 mm</span>
+        </div>
+
+        <div class="hud-card" id="hud-massa">
+          <div class="hud-label-group">
+            <span class="hud-label">Massa CAD</span>
+            <span class="hud-desc">Estimada pelo modelo 3D</span>
+          </div>
+          <span class="hud-value">0,66 g</span>
+        </div>
+
+        <div class="hud-card" id="hud-volume">
+          <div class="hud-label-group">
+            <span class="hud-label">Volume</span>
+            <span class="hud-desc">Volume do modelo</span>
+          </div>
+          <span class="hud-value">694,80 mm³</span>
+        </div>
+
+        <div class="hud-card" id="hud-area">
+          <div class="hud-label-group">
+            <span class="hud-label">Área Superficial</span>
+            <span class="hud-desc">Área total do modelo</span>
+          </div>
+          <span class="hud-value">1.615,73 mm²</span>
+        </div>
+
+        <div class="hud-card" id="hud-material">
+          <div class="hud-label-group">
+            <span class="hud-label">Material</span>
+            <span class="hud-desc">Polietileno</span>
+          </div>
+          <span class="hud-value">PE · 952 kg/m³</span>
+        </div>
+
+        <div class="hud-card" id="hud-cad">
+          <div class="hud-label-group">
+            <span class="hud-label">Modelo CAD</span>
+            <span class="hud-desc">Ferramenta de modelagem</span>
+          </div>
+          <span class="hud-value">SOLIDWORKS 2021</span>
+        </div>
+      </div>
+
+      <div class="hud-footer">
+        <span class="hud-footer-title">Notas de Projeto</span>
+        Medidas criadas com base em um frasco de referência, com adaptações exclusivas para este conceito. Dimensões
+        críticas pendentes de ensaios físicos.
+      </div>
+    </div>
+
+    <!-- PAINEL EDITOR -->
+    <div class="editor-panel" id="editorPanel">
+      <div class="editor-header">
+        <h3>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+          </svg>
+          Editor de Conteúdo
+        </h3>
+        <button class="btn btn-icon btn-danger" onclick="setMode('present')" style="padding: 4px;"
+          title="Fechar Editor">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="editor-scroll">
+        <div class="form-group">
+          <label for="editTitle">Título do Slide</label>
+          <input type="text" id="editTitle" class="form-control" oninput="updateActiveSlideFromEditor()">
+        </div>
+
+        <div class="form-group">
+          <label for="editSubtitle">Subtítulo / Categoria</label>
+          <input type="text" id="editSubtitle" class="form-control" oninput="updateActiveSlideFromEditor()">
+        </div>
+
+        <div class="form-group">
+          <label for="editImage">Render Associado</label>
+          <select id="editImage" class="form-control" onchange="updateActiveSlideFromEditor()">
+            <option value="Tampa Híbrida Cimed render v25 100-256 isometria azul.png">v25 - Isometria Azul</option>
+            <option value="Tampa Híbrida Cimed render v26 100-256 frontal azul.png">v26 - Frontal Azul</option>
+            <option value="Tampa Híbrida Cimed render v27 100-256 lateral azul.png">v27 - Lateral Azul</option>
+            <option value="Tampa Híbrida Cimed render v28 100-256 topo azul.png">v28 - Topo Azul</option>
+            <option value="Tampa Híbrida Cimed render v29 100-256 inferior azul.png">v29 - Inferior Azul</option>
+            <option value="Tampa Híbrida Cimed render v30 100-256 lateral 3_4 azul.png">v30 - Lateral 3/4 Azul</option>
+            <option value="Tampa Híbrida Cimed render v31 100-256 corte longitudinal azul.png">v31 - Corte Longitudinal
+            </option>
+            <option value="Flaconete 10 ml CIMED v01 100-256 .png">v32 - O Frasco Soprado</option>
+            <option value="Tampa Híbrida Cimed render v33 conjunto azul.png">v33 - Conjunto Frasco e Tampa (Futuro)
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Tópicos / Bullet Points</label>
+          <div class="bullets-editor-list" id="bulletsEditorList">
+            <!-- Gerado por JS -->
+          </div>
+          <button class="btn" style="margin-top: 8px; justify-content: center; width: 100%;"
+            onclick="addBulletToEditor()">
+            + Adicionar Tópico
+          </button>
+        </div>
+
+        <div class="form-group">
+          <label for="editNotes">Notas Técnicas / Alertas</label>
+          <textarea id="editNotes" class="form-control" oninput="updateActiveSlideFromEditor()"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Destaques no HUD (Ativar Elementos)</label>
+          <div class="hud-tag-selector" style="grid-template-columns: repeat(3, 1fr);">
+            <label class="hud-tag-checkbox"><input type="checkbox" value="diac"
+                onchange="updateActiveSlideFromEditor()"> Ø Externo</label>
+            <label class="hud-tag-checkbox"><input type="checkbox" value="alt" onchange="updateActiveSlideFromEditor()">
+              Altura</label>
+            <label class="hud-tag-checkbox"><input type="checkbox" value="par" onchange="updateActiveSlideFromEditor()">
+              Parede</label>
+            <label class="hud-tag-checkbox"><input type="checkbox" value="nerv"
+                onchange="updateActiveSlideFromEditor()"> Nervuras</label>
+            <label class="hud-tag-checkbox"><input type="checkbox" value="diag"
+                onchange="updateActiveSlideFromEditor()"> Ø Gargalo</label>
+            <label class="hud-tag-checkbox"><input type="checkbox" value="altu"
+                onchange="updateActiveSlideFromEditor()"> Altura Útil</label>
+            <label class="hud-tag-checkbox"><input type="checkbox" value="pontes"
+                onchange="updateActiveSlideFromEditor()"> Pontes Lacre</label>
+            <label class="hud-tag-checkbox"><input type="checkbox" value="bl-corpo"
+                onchange="updateActiveSlideFromEditor()"> 3D Corpo</label>
+            <label class="hud-tag-checkbox"><input type="checkbox" value="bl-abas"
+                onchange="updateActiveSlideFromEditor()"> 3D c/ Abas</label>
+
+            <label class="hud-tag-checkbox"><input type="checkbox" value="bl-batoque"
+                onchange="updateActiveSlideFromEditor()"> 3D Batoque</label>
+            <label class="hud-tag-checkbox"><input type="checkbox" value="bl-altura"
+                onchange="updateActiveSlideFromEditor()"> 3D Altura</label>
+          </div>
+        </div>
+
+        <div class="editor-slide-management">
+          <h4>Gerenciamento do Slide Ativo</h4>
+          <div class="management-grid">
+            <button class="btn" onclick="moveActiveSlide('up')" title="Mover este slide para cima">
+              Mover Subir ▲
+            </button>
+            <button class="btn" onclick="moveActiveSlide('down')" title="Mover este slide para baixo">
+              Mover Descer ▼
+            </button>
+            <button class="btn btn-primary" onclick="createNewSlide()" title="Criar novo slide após este">
+              + Inserir Slide
+            </button>
+            <button class="btn btn-danger" onclick="deleteActiveSlide()" title="Excluir este slide permanentemente">
+              Excluir Slide
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="editor-actions-bottom">
+        <button class="btn btn-danger" onclick="resetDefaultData()"
+          title="Reverter todas as edições para o texto original">
+          Reverter Padrão
+        </button>
+      </div>
+    </div>
+
+    <!-- NAV BAR REMOVIDA daqui — movida para dentro do main-content -->
+
+  </div>
+
+  <!-- LIGHTBOX / ZOOM -->
+  <div class="lightbox" id="imageLightbox" onclick="closeZoom()">
+    <div class="lightbox-close" onclick="event.stopPropagation(); closeZoom();">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <line x1="18" y1="6" x2="6" y2="18" />
+        <line x1="6" y1="6" x2="18" y2="18" />
+      </svg>
+    </div>
+    <div class="lightbox-content" onclick="event.stopPropagation()">
+      <img src="" alt="" class="lightbox-img" id="lightboxImg">
+      <div class="lightbox-caption" id="lightboxCaption"></div>
+    </div>
+  </div>
+
+  <!-- MODAL DE AJUDA -->
+  <div class="modal" id="helpModal" onclick="closeHelp()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <div class="modal-title">Atalhos do Apresentador</div>
+      <div class="modal-body">
+        <p>Utilize os atalhos de teclado para controlar a apresentação de forma rápida durante as reuniões:</p>
+        <p>• <code>Seta Direita</code> ou <code>Espaço</code>: Avança para o próximo slide.</p>
+        <p>• <code>Seta Esquerda</code>: Retorna ao slide anterior.</p>
+        <p>• <code>P</code>: Inicia ou pausa a reprodução automática (Slideshow).</p>
+        <p>• <code>F</code>: Oculta/Mostra painéis laterais (Modo Limpo de Apresentação).</p>
+        <p>• <code>Esc</code>: Fecha zoom de imagem ou sai do modo tela cheia.</p>
+        <p style="margin-top: 8px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 8px;">
+          <strong>Nota de Salvamento:</strong> Ao clicar em "Salvar Arquivo", salve o arquivo baixado com o nome
+          <code>index.html</code> na mesma pasta. Isso substituirá este arquivo e gravará suas alterações de forma
+          definitiva!
+        </p>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-primary" onclick="closeHelp()">Entendido</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST DE NOTIFICAÇÃO -->
+  <div class="toast" id="toastNotification">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+      <polyline points="22 4 12 14.01 9 11.01" />
+    </svg>
+    <span id="toastMessage">Operação realizada com sucesso!</span>
+  </div>
+
+  <!-- ==========================================================================
+     10. BANCO DE DADOS INICIAL DOS SLIDES (JSON EMBUTIDO)
+     ========================================================================== */ -->
+  <script id="slide-data" type="application/json">
+[
+  {
+    "id": "slide-1",
+    "title": "Tampa Batoque Híbrida",
+    "subtitle": "Apresentação técnica do conceito · CIMED",
+    "image": "Tampa Híbrida Cimed render v25 100-256 isometria azul.png",
+    "bullets": [
+      "Uma tampa compacta com quatro funções integradas: <strong>Vedar</strong> · <strong>Abrir</strong> · <strong>Evidenciar</strong> · <strong>Pegar</strong>",
+      "Desenvolvimento CAD, arquitetura funcional e estudo visual de embalagem.",
+      "Conceito inovador sob medida para apresentação corporativa CIMED.",
+      "Arquitetura mecânica projetada para alta densidade em flaconete compacto."
+    ],
+    "notes": "Status: Conceito mecânico e apresentação visual avançados. Dimensões, forças de ruptura e vedação requerem validação física.",
+    "hudHighlights": ["cad", "material"]
+  },
+  {
+    "id": "slide-2",
+    "title": "O Conceito em uma Página",
+    "subtitle": "Visão geral e diretrizes de projeto",
+    "image": "Tampa Híbrida Cimed render v30 100-256 lateral 3_4 azul.png",
+    "bullets": [
+      "<strong>Identidade própria:</strong> duas zonas de pega, nervuras concentradas, indicação 'GIRE' e geometria superior limpa.",
+      "<strong>Ergonomia de abertura:</strong> abas laterais para pega de pinça + pequeno giro de abertura, coerente com o conceito.",
+      "<strong>Engenharia visível:</strong> corte e vista inferior separam perfeitamente vedação, estrutura e mecanismo do lacre.",
+      "<strong>Restrição dominante:</strong> espaço do flaconete é pequeno; arquitetura extremamente compacta."
+    ],
+    "notes": "Os renders representam o conceito no estágio de proposta CAD. Dimensões físicas dependem de engenharia de moldabilidade.",
+    "hudHighlights": ["cad", "volume", "area"]
+  },
+  {
+    "id": "slide-3",
+    "title": "Requisitos e Restrições de Construção",
+    "subtitle": "Valores de projeto registrados no desenvolvimento",
+    "image": "Tampa Híbrida Cimed render v26 100-256 frontal azul.png",
+    "bullets": [
+      "<strong>Ø 13,5-15,5 mm:</strong> diâmetro externo da tampa.",
+      "<strong>7,5 mm:</strong> altura total incluindo o lacre integrado.",
+      "<strong>1,3 mm:</strong> espessura da parede externa de proteção.",
+      "<strong>54 nervuras:</strong> canais concentrados de pega para transmissão de torque.",
+      "<strong>Ø 8,7 mm:</strong> diâmetro interno do gargalo de acoplamento do flaconete.",
+      "<strong>3,7 mm:</strong> altura útil disponível para acomodação da vedação interna.",
+      "<strong>0,67 g:</strong> massa estimada da tampa, calculada pelo SolidWorks."
+    ],
+    "notes": "Restrição dominante: o espaço útil disponível no flaconete é pequeno. A engenharia acomodou os 4 sistemas integrados.",
+    "hudHighlights": ["diac", "alt", "par", "nerv", "diag", "altu", "massa", "volume", "area", "material", "cad"]
+  },
+  {
+    "id": "slide-4",
+    "title": "Arquitetura Funcional",
+    "subtitle": "Distribuição de funções na tampa",
+    "image": "Tampa Híbrida Cimed render v28 100-256 topo azul.png",
+    "bullets": [
+      "<strong>1. Vedação:</strong> Batoque com região cônica de contato para gerar interferência de vedação primária.",
+      "<strong>2. Abertura:</strong> Rosca de passo grande / quick thread, com múltiplos trechos curtos para pequeno giro.",
+      "<strong>3. Lacre:</strong> Sistema com pontes de ruptura projetado para trabalhar predominantemente por força axial.",
+      "<strong>4. Pega ergonômica otimizada:</strong> abas vazadas reduzem material e favorecem o resfriamento, enquanto o chanfro concentra material nas áreas de pega, aumentando conforto e torque."
+    ],
+    "notes": "A vista de topo evidencia a comunicação do gesto através do relevo indicativo 'GIRE' com setas de movimento.",
+    "hudHighlights": ["nerv", "pontes"]
+  },
+  {
+    "id": "slide-5",
+    "title": "Lacre — Construção Proposta",
+    "subtitle": "Geometria da câmara de deformação e pontes de ruptura",
+    "image": "Tampa Híbrida Cimed render v29 100-256 inferior azul.png",
+    "bullets": [
+      "<strong>1,00 mm:</strong> altura da câmara de cisalhamento do lacre.",
+      "<strong>0,20 mm:</strong> largura radial disponível.",
+      "<strong>0,80 mm:</strong> parede da saia da tampa.",
+      "<strong>1,30 mm:</strong> parede do anel do lacre inferior.",
+      "<strong>0,50 mm:</strong> altura da ancoragem axial do gargalo.",
+      "<strong>12 pontes:</strong> total de conexões de ruptura axial propostas."
+    ],
+    "notes": "Intenção funcional: romper axialmente o lacre sem depender da rotação de rosca — evidência de violação independe da abertura.",
+    "hudHighlights": ["pontes"]
+  },
+  {
+    "id": "slide-6",
+    "title": "Ergonomia e Interface de Abertura",
+    "subtitle": "Comunicação externa do gesto mecânico",
+    "image": "Tampa Híbrida Cimed render v27 100-256 lateral azul.png",
+    "bullets": [
+      "<strong>Pega Menor (Polegar) — ≈ 3x3x4 mm:</strong> Atua como um batente firme (stop), posicionado ergonomicamente para o dedão à frente.",
+      "<strong>Pega Maior (Tração) — 4x4x4 mm:</strong> Acomoda indicador e médio. Formato triangular com furo central para economizar material e acelerar o resfriamento na injeção.",
+      "<strong>Setas + Relevo 'GIRE':</strong> Transforma a função mecânica de abertura em uma informação visual direta ao usuário.",
+      "<strong>Rosca Quick Thread:</strong> Passo grande (aprox. 3 mm) que traduz a força das pegas em abertura com poucas voltas."
+    ],
+    "notes": "Critério de sucesso: o usuário deve perceber o travamento firme no fechamento e abertura de precisão com baixo esforço.",
+    "hudHighlights": ["rosca-passo"]
+  },
+  {
+    "id": "slide-7",
+    "title": "Corte Longitudinal",
+    "subtitle": "Seção transversal da arquitetura interna",
+    "image": "Tampa Híbrida Cimed render v31 100-256 corte longitudinal azul.png",
+    "bullets": [
+      "<strong>Região cônica do batoque:</strong> Evidencia o contato de interferência com o bocal do flaconete.",
+      "<strong>Câmara de rebaixo do lacre:</strong> Mostra o rebaixo interno onde o lacre é contido e cizilhado.",
+      "<strong>12 pontes de ruptura:</strong> Posicionamento vertical das pontas estruturais de cisalhamento.",
+      "<strong>Rosca de passo rápido:</strong> Perfil de rosca interna otimizado para encaixe rápido."
+    ],
+    "notes": "A visualização em corte longitudinal comprova a viabilidade geométrica das espessuras de parede e folgas internas.",
+    "hudHighlights": ["diac", "diag", "pontes", "rosca-passo", "rosca-prof"]
+  },
+  {
+    "id": "slide-8",
+    "title": "Pista Helicoidal / Sistema de Came",
+    "subtitle": "Conceito de abertura por pequeno giro (Quick Thread)",
+    "image": "Tampa Híbrida Cimed render v32 100-256 helice pista entrada azul.png",
+    "bullets": [
+      "<strong>Passo ≈ 3,0 mm e Giro 90°:</strong> A pista transforma um giro curto em um levantamento axial (1,0–1,5 mm) suficiente para liberar a vedação.",
+      "<strong>4 Pistas e Entradas Cônicas:</strong> Distribui a carga ao redor da tampa e garante uma montagem fácil no restrito espaço de 3,7 mm de altura útil.",
+      "<strong>Geometria de Rampa Larga:</strong> Dividida em 3 zonas (entrada guia, rampa de subida e batente final), evitando arestas agressivas.",
+      "<strong>Cinemática Desacoplada:</strong> O giro (90°) alivia a compressão do batoque, enquanto o lacre se rompe simultaneamente por tração axial pura."
+    ],
+    "notes": "Sensação projetada para o usuário (4x90°): encaixa → comprime → trava → pequeno giro → libera.",
+    "hudHighlights": ["altu", "rosca-passo", "rosca-prof"]
+  },
+  {
+    "id": "slide-9",
+    "title": "Estudo Visual e Material",
+    "subtitle": "Parâmetros físicos e iluminação de estúdio",
+    "image": "Tampa Híbrida Cimed render v30 100-256 lateral 3_4 azul.png",
+    "bullets": [
+      "<strong>Render 3D de desenvolvimento:</strong> representação visual para análise de forma, material e acabamento.",
+      "<strong>Cor escolhida:</strong> Azul profundo / azul petróleo, melhorando o contraste de relevos, nervuras e textos.",
+      "<strong>Acabamento:</strong> Textura plástica com roughness de referência ≈ 0,45 para brilho acetinado e leitura de forma.",
+      "<strong>Câmera:</strong> Distância focal de 74mm, minimizando distorções angulares e exageros de perspectiva.",
+      "<strong>Iluminação:</strong> Estúdio virtual com luz principal difusa, luzes de rebote e preenchimento de topo."
+    ],
+    "notes": "Conjunto visual produzido em ambiente de renderizador Cycles com fundo branco puro sem sombras duras.",
+    "hudHighlights": ["material", "massa"]
+  },
+  {
+    "id": "slide-10",
+    "title": "Status do Conceito & Recomendações",
+    "subtitle": "Desenvolvimento · Simulação · Validações Necessárias",
+    "image": "Tampa Híbrida Cimed render v25 100-256 isometria azul.png",
+    "bullets": [
+      "<strong>Simulação:</strong> Análise de elementos finitos não-linear iniciada para prever o torque de ruptura do lacre.",
+      "<strong>Validação Dimensional:</strong> Conferir folgas com o gargalo físico real soprado da CIMED.",
+      "<strong>Validação Funcional:</strong> Caracterizar força física de cisalhamento do lacre e estanqueidade sob pressão.",
+      "<strong>Recomendação:</strong> Executar prototipagem de alta fidelidade para testes ergonômicos de pega antes do ferramental."
+    ],
+    "notes": "Status: conceito mecânico + apresentação visual avançados; validação industrial de engenharia pendente.",
+    "hudHighlights": []
+  },
+  {
+    "id": "slide-11",
+    "title": "Gargalo do Frasco CIMED",
+    "subtitle": "",
+    "image": "Flaconete 10 ml CIMED v01 100-256 .png",
+    "bullets": [
+      "<strong>1. Dimensão principal:</strong> Ø interno do gargalo (8,7 mm) contra o Ø interno do batoque na tampa (9,0 mm).",
+      "<strong>2. Espaço axial:</strong> Altura útil restrita a 3,7 mm, determinante para a arquitetura compacta.",
+      "<strong>3. Região de vedação cônica:</strong> ~5,1 mm. O batoque entra progressivamente (entrada → contato → interferência → vedação).",
+      "<strong>4. Região estrutural e Batoque:</strong> ~0,4 mm de estabilização. Interferência sutil e controlada entre o batoque (9,0 mm) e o gargalo (8,7 mm) para fechamento de precisão.",
+      "<strong>5. Sincronia com Pista Helicoidal (Quick Thread):</strong> Fechamento: Batoque entra → Região cônica interfere → Pista trava. Abertura: Giro curto → Pista gera levantamento → Batoque aliviado → Lacre rompe.",
+      "<strong>6. Distribuição de Funções:</strong> Gargalo = passivo; Batoque = vedação; Pista = movimento; Lacre = evidência de violação.",
+      "<strong>7. Gargalo e Lacre:</strong> Câmara de 1,00 mm de altura x 0,20 mm de largura radial. 12 pontes rompidas por força axial.",
+      "<strong>8. Solução para 3,7 mm:</strong> A combinação de Quick Thread + pequeno giro + batoque cônico possibilitou a arquitetura em um espaço mínimo.",
+      "<strong>9. Sensação Desejada:</strong> Entrada controlada → contato → compressão → fechamento firme → giro curto para abertura.",
+      "<strong>10. O Gargalo como Centro:</strong> Toda a arquitetura gira em torno dessa interface (Gargalo → Batoque → Vedação → Pista → Lacre → Pega)."
+    ],
+    "notes": "O render isolado destaca a metade superior do frasco; a próxima etapa (conjunto) demonstrará o resultado final da interface.",
+    "hudHighlights": ["diag", "altu", "bl-batoque"]
+  },
+  {
+    "id": "slide-12",
+    "title": "Fechamento — Montagem Final",
+    "subtitle": "",
+    "image": "Flaconete 10 ml - Tampa  montagem CIMED v01 100-256 .png",
+    "bullets": [
+      "<strong>Montagem completa:</strong> Tampa Batoque Híbrida posicionada no flaconete de 10 ml, com flaconete, gargalo, batoque, corpo da tampa e lacre integrados.",
+      "<strong>Produto acabado:</strong> Enquadramento limpo, iluminação controlada e proporções do projeto — permite avaliação visual dos detalhes construtivos da tampa e de sua relação com o flaconete.",
+      "<strong>Sequência completa:</strong> Esta imagem encerra a sequência do projeto, com representação visual da tampa isolada e montada no flaconete, pronta para apresentação e avaliação do conjunto."
+    ],
+    "notes": "Com essa etapa concluída, encerramos a sequência de imagens do projeto. A tampa foi desenvolvida especificamente para este gargalo — cada detalhe foi pensado para essa interface.",
+    "hudHighlights": ["diac", "alt", "diag", "altu", "bl-batoque"]
+  }
+]
+  </script>
+
+  <!-- ==========================================================================
+     11. LÓGICA DE PROGRAMAÇÃO DA APLICAÇÃO (JAVASCRIPT)
+     ========================================================================== */ -->
+  <script>
+    // ESTADO GLOBAL DA APLICAÇÃO
+    let slides = [];
+    let currentSlideIndex = 0;
+    let mode = 'present'; // 'present' ou 'edit'
+    let currentTheme = 'default';
+    let slideshowInterval = null;
+    let slideshowSpeed = 5000; // ms
+    let autoplayStartTime = 0;
+    let autoplayRemaining = 0;
+    let autoplayProgressInterval = null;
+
+    // Inicialização da Aplicação
+    window.addEventListener('DOMContentLoaded', () => {
+      loadSlideData();
+      renderSlideList();
+      showSlide(0);
+      setupKeyboardShortcuts();
+
+      // Carrega tema salvo se houver
+      const savedTheme = localStorage.getItem('cimed-presentation-theme');
+      if (savedTheme) {
+        changeTheme(savedTheme);
+        document.getElementById('themeSelect').value = savedTheme;
+      }
+
+      // Inicializa velocidade do slideshow (60s padrão)
+      slideshowSpeed = 60000;
+    });
+
+    // 1. CARREGAMENTO DOS DADOS (localStorage ou Embutido)
+    function loadSlideData() {
+      const savedData = localStorage.getItem('cimed-presentation-slides');
+      if (savedData) {
+        try {
+          slides = JSON.parse(savedData);
+          showToast('Edições locais carregadas da memória do navegador.');
+          return;
+        } catch (e) {
+          console.error("Erro ao carregar dados do localStorage, revertendo para padrão.", e);
+        }
+      }
+
+      // Carrega dados embutidos no script tag
+      const jsonScript = document.getElementById('slide-data');
+      if (jsonScript) {
+        try {
+          slides = JSON.parse(jsonScript.textContent);
+        } catch (e) {
+          console.error("Erro ao fazer parse dos dados embutidos", e);
+        }
+      }
+    }
+
+    // 2. EXIBIÇÃO E RENDERIZAÇÃO DOS SLIDES
+    function showSlide(index) {
+      if (index < 0 || index >= slides.length) return;
+
+      // Controla a transição visual
+      const stage = document.getElementById('slideStage');
+      stage.classList.remove('fade-in', 'slide-left', 'slide-up');
+      void stage.offsetWidth; // Trigger reflow
+
+      // Escolhe estilo de animação aleatório ou fixo
+      stage.classList.add('slide-left');
+
+      currentSlideIndex = index;
+      const slide = slides[index];
+
+      // Atualiza Elementos do Slide
+      document.getElementById('slideImg').src = slide.image;
+      document.getElementById('slideSubtitle').textContent = slide.subtitle;
+      document.getElementById('slideTitle').textContent = slide.title;
+      document.getElementById('slideNotes').textContent = slide.notes;
+
+      // Renderiza Bullets com animação
+      const bulletsContainer = document.getElementById('slideBullets');
+      bulletsContainer.innerHTML = '';
+      slide.bullets.forEach((bullet, idx) => {
+        const item = document.createElement('div');
+        item.className = 'bullet-item';
+        item.style.animation = `slideSlideLeft 0.3s cubic-bezier(0.16, 1, 0.3, 1) ${idx * 0.08}s both`;
+
+        // Icone SVG de check técnico
+        item.innerHTML = `
+          <div class="bullet-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="bullet-text">${bullet}</div>
+        `;
+        bulletsContainer.appendChild(item);
+      });
+
+      // Atualiza Destaques no HUD Técnico
+      updateHUDHighlights(slide.hudHighlights);
+
+      // Atualiza Marcadores de Estado e Lista Lateral
+      document.getElementById('slideCounter').textContent = `${index + 1} / ${slides.length}`;
+      updateActiveSlideListItem(index);
+      updateProgressBar();
+
+      // Se o editor estiver aberto, atualiza os campos com o slide ativo
+      if (mode === 'edit') {
+        populateEditorFields(slide);
+      }
+
+      // Reinicia o tempo do autoplay se ele estiver ativo
+      if (slideshowInterval) {
+        startAutoplayTimer();
+      }
+    }
+
+    // 3. BARRA DE PROGRESSO E SLIDESHOW
+    function updateProgressBar() {
+      const percentage = ((currentSlideIndex + 1) / slides.length) * 100;
+      document.getElementById('progressBarFill').style.width = `${percentage}%`;
+    }
+
+    function prevSlide() {
+      if (currentSlideIndex > 0) {
+        showSlide(currentSlideIndex - 1);
+      } else {
+        showSlide(slides.length - 1); // Loop para o final
+      }
+    }
+
+    function nextSlide() {
+      if (currentSlideIndex < slides.length - 1) {
+        showSlide(currentSlideIndex + 1);
+      } else {
+        showSlide(0); // Loop para o início
+      }
+    }
+
+    function toggleSlideshow() {
+      const playIcon = document.getElementById('playPauseIcon');
+      const progressAutoplay = document.getElementById('progressBarAutoplay');
+
+      if (slideshowInterval) {
+        // Pausar
+        clearInterval(slideshowInterval);
+        clearInterval(autoplayProgressInterval);
+        slideshowInterval = null;
+        autoplayProgressInterval = null;
+        playIcon.innerHTML = '<polygon points="5 3 19 12 5 21 5 3"/>'; // Icone de Play
+        progressAutoplay.style.width = '0%';
+        showToast('Slideshow pausado.');
+      } else {
+        // Iniciar
+        playIcon.innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>'; // Icone de Pause
+        showToast('Slideshow iniciado.');
+        startAutoplayTimer();
+      }
+    }
+
+    function startAutoplayTimer() {
+      if (slideshowInterval) clearInterval(slideshowInterval);
+      if (autoplayProgressInterval) clearInterval(autoplayProgressInterval);
+
+      const speedSecs = slideshowSpeed / 1000;
+      const progressAutoplay = document.getElementById('progressBarAutoplay');
+
+      let elapsed = 0;
+      const step = 50; // Atualiza a cada 50ms para suavidade
+
+      autoplayProgressInterval = setInterval(() => {
+        elapsed += step;
+        const progress = (elapsed / slideshowSpeed) * 100;
+        progressAutoplay.style.width = `${progress}%`;
+      }, step);
+
+      slideshowInterval = setInterval(() => {
+        nextSlide();
+      }, slideshowSpeed);
+    }
+
+    function setAutoplaySpeed(seconds) {
+      slideshowSpeed = seconds * 1000;
+      // Atualiza o botão ativo
+      document.querySelectorAll('.speed-btn').forEach(btn => btn.classList.remove('active'));
+      const targetId = 'speed' + seconds;
+      const targetBtn = document.getElementById(targetId);
+      if (targetBtn) targetBtn.classList.add('active');
+      // Reinicia o timer se já estiver rodando
+      if (slideshowInterval) {
+        startAutoplayTimer();
+      }
+    }
+
+    // 4. SISTEMA DE TEMAS
+    function changeTheme(themeName) {
+      const root = document.getElementById('appContainer');
+      root.removeAttribute('data-theme');
+
+      if (themeName !== 'default') {
+        root.setAttribute('data-theme', themeName);
+      }
+      currentTheme = themeName;
+      localStorage.setItem('cimed-presentation-theme', themeName);
+    }
+
+    // 5. HUD TÉCNICO HIGHLIGHTS
+    function updateHUDHighlights(highlightsArray) {
+      // Limpa destaques anteriores
+      const allCards = document.querySelectorAll('.hud-card');
+      allCards.forEach(card => card.classList.remove('active'));
+
+      // Aplica novos
+      if (!highlightsArray || !Array.isArray(highlightsArray)) return;
+      highlightsArray.forEach(id => {
+        const card = document.getElementById(`hud-${id}`);
+        if (card) card.classList.add('active');
+      });
+    }
+
+    // 6. GESTÃO DA LISTA LATERAL (SIDEBAR)
+    function renderSlideList() {
+      const listContainer = document.getElementById('slideList');
+      listContainer.innerHTML = '';
+
+      slides.forEach((slide, idx) => {
+        const item = document.createElement('li');
+        item.className = 'slide-item';
+        item.onclick = () => showSlide(idx);
+        item.dataset.index = idx;
+
+        item.innerHTML = `
+          <div class="slide-number">${idx + 1}</div>
+          <div class="slide-info">
+            <span class="slide-title-thumb">${slide.title}</span>
+            <span class="slide-image-thumb-name">${slide.image.split(' ').pop()}</span>
+          </div>
+        `;
+        listContainer.appendChild(item);
+      });
+    }
+
+    function updateActiveSlideListItem(activeIndex) {
+      const allItems = document.querySelectorAll('.slide-item');
+      allItems.forEach(item => item.classList.remove('active'));
+
+      const activeItem = document.querySelector(`.slide-item[data-index="${activeIndex}"]`);
+      if (activeItem) {
+        activeItem.classList.add('active');
+        activeItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
+
+    // 7. MODO DE EDIÇÃO
+    function setMode(newMode) {
+      mode = newMode;
+      const app = document.getElementById('appContainer');
+      const btnPresent = document.getElementById('btnModePresent');
+      const btnEdit = document.getElementById('btnModeEdit');
+
+      if (newMode === 'edit') {
+        app.classList.add('editor-active');
+        btnEdit.classList.add('active');
+        btnPresent.classList.remove('active');
+        populateEditorFields(slides[currentSlideIndex]);
+        showToast('Modo Editor ativado. As alterações são sincronizadas ao digitar.');
+      } else {
+        app.classList.remove('editor-active');
+        btnPresent.classList.add('active');
+        btnEdit.classList.remove('active');
+      }
+    }
+
+    function populateEditorFields(slide) {
+      document.getElementById('editTitle').value = slide.title;
+      document.getElementById('editSubtitle').value = slide.subtitle;
+      document.getElementById('editImage').value = slide.image;
+      document.getElementById('editNotes').value = slide.notes;
+
+      // Preenche checkbox do HUD
+      const checkboxes = document.querySelectorAll('.hud-tag-checkbox input');
+      checkboxes.forEach(chk => {
+        chk.checked = slide.hudHighlights.includes(chk.value);
+      });
+
+      // Preenche Bullets Editor
+      const bulletsList = document.getElementById('bulletsEditorList');
+      bulletsList.innerHTML = '';
+      slide.bullets.forEach((bullet, idx) => {
+        createBulletRowInEditor(bullet, idx);
+      });
+    }
+
+    function createBulletRowInEditor(text, index) {
+      const container = document.getElementById('bulletsEditorList');
+      const row = document.createElement('div');
+      row.className = 'bullet-edit-row';
+      row.innerHTML = `
+        <input type="text" class="form-control" value="${text.replace(/"/g, '&quot;')}" oninput="updateActiveSlideBullets()">
+        <button class="btn btn-icon btn-danger" onclick="removeBulletFromEditor(${index})" style="padding: 6px;" title="Remover tópico">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      `;
+      container.appendChild(row);
+    }
+
+    function addBulletToEditor() {
+      const slide = slides[currentSlideIndex];
+      slide.bullets.push("Novo tópico de apresentação...");
+      populateEditorFields(slide);
+      updateActiveSlideFromEditor();
+    }
+
+    function removeBulletFromEditor(bulletIndex) {
+      const slide = slides[currentSlideIndex];
+      slide.bullets.splice(bulletIndex, 1);
+      populateEditorFields(slide);
+      updateActiveSlideFromEditor();
+    }
+
+    function updateActiveSlideBullets() {
+      const rows = document.querySelectorAll('.bullet-edit-row input');
+      const updatedBullets = [];
+      rows.forEach(input => {
+        if (input.value.trim() !== "") {
+          updatedBullets.push(input.value);
+        }
+      });
+      slides[currentSlideIndex].bullets = updatedBullets;
+
+      // Atualiza visualização ativa na tela
+      showSlide(currentSlideIndex);
+      saveToLocalStorage();
+    }
+
+    function updateActiveSlideFromEditor() {
+      const slide = slides[currentSlideIndex];
+      slide.title = document.getElementById('editTitle').value;
+      slide.subtitle = document.getElementById('editSubtitle').value;
+      slide.image = document.getElementById('editImage').value;
+      slide.notes = document.getElementById('editNotes').value;
+
+      // Coleta HUD Highlights
+      const checkboxes = document.querySelectorAll('.hud-tag-checkbox input');
+      slide.hudHighlights = [];
+      checkboxes.forEach(chk => {
+        if (chk.checked) slide.hudHighlights.push(chk.value);
+      });
+
+      // Atualiza lista lateral e a exibição do slide central
+      renderSlideList();
+      showSlide(currentSlideIndex);
+      saveToLocalStorage();
+    }
+
+    // 8. SALVAMENTO E EXPORTAÇÃO
+    function saveToLocalStorage() {
+      localStorage.setItem('cimed-presentation-slides', JSON.stringify(slides));
+    }
+
+    function resetDefaultData() {
+      if (confirm('Tem certeza que deseja apagar todas as suas alterações locais e reverter ao texto padrão de fábrica?')) {
+        localStorage.removeItem('cimed-presentation-slides');
+        loadSlideData();
+        renderSlideList();
+        showSlide(0);
+        showToast('Os dados foram revertidos ao texto inicial.');
+      }
+    }
+
+    // Mecanismo "TiddlyWiki" de Autosalvamento baixando o arquivo atualizado
+    function saveFile() {
+      // 1. Obtém o HTML atual completo da página
+      let pageHtml = document.documentElement.outerHTML;
+
+      // 2. Localiza a tag script de dados e a substitui com os novos dados JSON
+      const regex = /<script id="slide-data" type="application\/json">[\s\S]*?<\/script>/;
+      const newJsonString = `<script id="slide-data" type="application/json">\n${JSON.stringify(slides, null, 2)}\n<\/script>`;
+
+      pageHtml = pageHtml.replace(regex, newJsonString);
+
+      // Limpa os estados de editor aberto e classes ativas de transição no HTML salvo
+      pageHtml = pageHtml.replace('class="app-container editor-active"', 'class="app-container"');
+      pageHtml = pageHtml.replace('class="app-container fullscreen"', 'class="app-container"');
+
+      // 3. Cria o blob de download
+      const blob = new Blob(['<!DOCTYPE html>\n' + pageHtml], { type: 'text/html;charset=utf-8' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'index.html'; // Nome sugerido do arquivo
+
+      // Trigger download
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      showToast('Download do arquivo index.html iniciado. Substitua o arquivo antigo para salvar permanentemente!');
+    }
+
+    // Exporta o texto dos slides no formato limpo para e-mails ou relatórios
+    function exportText() {
+      let formattedText = "APRESENTAÇÃO CONCEITUAL: TAMPA BATOQUE HÍBRIDA CIMED\n";
+      formattedText += "=========================================================\n\n";
+
+      slides.forEach((slide, idx) => {
+        formattedText += `SLIDE ${idx + 1}: ${slide.title.toUpperCase()}\n`;
+        formattedText += `${slide.subtitle}\n`;
+        formattedText += `Imagem de Referência: ${slide.image}\n`;
+        formattedText += `---------------------------------------------------------\n`;
+        slide.bullets.forEach(bullet => {
+          // Remove tags html simples como <strong> ou </strong> do texto bruto
+          const cleanBullet = bullet.replace(/<\/?[^>]+(>|$)/g, "");
+          formattedText += `• ${cleanBullet}\n`;
+        });
+        if (slide.notes) {
+          formattedText += `Obs./Engenharia: ${slide.notes}\n`;
+        }
+        formattedText += "\n";
+      });
+
+      // Copia para área de transferência
+      navigator.clipboard.writeText(formattedText).then(() => {
+        showToast('Texto estruturado copiado para a área de transferência!');
+      }).catch(err => {
+        console.error('Falha ao copiar texto: ', err);
+        showToast('Erro ao copiar texto automaticamente. Veja o console.');
+      });
+    }
+
+    // 9. GERENCIAMENTO E EDIÇÃO DE SLIDES (Adicionar/Remover/Reordenar)
+    function createNewSlide() {
+      const newSlide = {
+        id: `slide-custom-${Date.now()}`,
+        title: "Título do Novo Slide",
+        subtitle: "Nova Categoria de Engenharia",
+        image: "Tampa Híbrida Cimed render v25 100-256 isometria azul.png",
+        bullets: [
+          "Insira tópicos importantes sobre as propriedades físicas do batoque.",
+          "Inclua observações ergonômicas e dados de simulação CAD."
+        ],
+        notes: "Nova nota de projeto pendente de revisão técnica e validações industriais.",
+        hudHighlights: []
+      };
+
+      // Insere o slide na posição seguinte do slide ativo
+      slides.splice(currentSlideIndex + 1, 0, newSlide);
+      saveToLocalStorage();
+      renderSlideList();
+      showSlide(currentSlideIndex + 1);
+      showToast('Novo slide adicionado com sucesso!');
+    }
+
+    function deleteActiveSlide() {
+      if (slides.length <= 1) {
+        showToast('Não é possível deletar. A apresentação deve conter ao menos 1 slide.');
+        return;
+      }
+
+      if (confirm(`Tem certeza que deseja excluir permanentemente o slide ativo: "${slides[currentSlideIndex].title}"?`)) {
+        slides.splice(currentSlideIndex, 1);
+        saveToLocalStorage();
+        renderSlideList();
+
+        // Ajusta índice ativo
+        const nextActive = Math.max(0, currentSlideIndex - 1);
+        showSlide(nextActive);
+        showToast('Slide excluído com sucesso.');
+      }
+    }
+
+    function moveActiveSlide(direction) {
+      if (direction === 'up' && currentSlideIndex > 0) {
+        // Troca posições
+        const temp = slides[currentSlideIndex];
+        slides[currentSlideIndex] = slides[currentSlideIndex - 1];
+        slides[currentSlideIndex - 1] = temp;
+
+        saveToLocalStorage();
+        renderSlideList();
+        showSlide(currentSlideIndex - 1);
+        showToast('Slide movido para cima.');
+      } else if (direction === 'down' && currentSlideIndex < slides.length - 1) {
+        const temp = slides[currentSlideIndex];
+        slides[currentSlideIndex] = slides[currentSlideIndex + 1];
+        slides[currentSlideIndex + 1] = temp;
+
+        saveToLocalStorage();
+        renderSlideList();
+        showSlide(currentSlideIndex + 1);
+        showToast('Slide movido para baixo.');
+      } else {
+        showToast('Operação de movimentação inválida.');
+      }
+    }
+
+    // 10. LIGHTBOX & FULLSCREEN MODALS
+    function openZoom() {
+      const lightbox = document.getElementById('imageLightbox');
+      const lightboxImg = document.getElementById('lightboxImg');
+      const lightboxCaption = document.getElementById('lightboxCaption');
+      const slide = slides[currentSlideIndex];
+
+      lightboxImg.src = slide.image;
+      lightboxCaption.innerHTML = `<strong>${slide.title}</strong> — ${slide.subtitle} (${slide.image})`;
+      lightbox.style.display = 'flex';
+    }
+
+    function closeZoom() {
+      document.getElementById('imageLightbox').style.display = 'none';
+    }
+
+    function toggleFullscreen() {
+      const container = document.getElementById('appContainer');
+      container.classList.toggle('fullscreen');
+      showToast('Visualização de Apresentador alternada. Pressione F para alternar.');
+    }
+
+    function showHelp() {
+      document.getElementById('helpModal').style.display = 'flex';
+    }
+
+    function closeHelp() {
+      document.getElementById('helpModal').style.display = 'none';
+    }
+
+    // Toast de Feedback
+    function showToast(msg) {
+      const toast = document.getElementById('toastNotification');
+      document.getElementById('toastMessage').textContent = msg;
+
+      toast.classList.add('active');
+      setTimeout(() => {
+        toast.classList.remove('active');
+      }, 3500);
+    }
+
+    // Configuração dos Atalhos do Teclado
+    function setupKeyboardShortcuts() {
+      document.addEventListener('keydown', (e) => {
+        // Ignora atalhos se o usuário estiver digitando no editor
+        if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA') {
+          if (e.key === 'Escape') {
+            document.activeElement.blur();
+          }
+          return;
+        }
+
+        if (e.key === 'ArrowRight' || e.key === ' ') {
+          e.preventDefault();
+          nextSlide();
+        } else if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          prevSlide();
+        } else if (e.key === 'p' || e.key === 'P') {
+          toggleSlideshow();
+        } else if (e.key === 'f' || e.key === 'F') {
+          toggleFullscreen();
+        } else if (e.key === 'Escape') {
+          closeZoom();
+          closeHelp();
+        }
+      });
+    }
+  </script>
+</body>
+
+</html>
