@@ -3,7 +3,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>Tampa Batoque Híbrida CIMED — Apresentação de Conceito</title>
 
   <!-- Fontes Premium -->
@@ -1480,10 +1481,155 @@
         color: #000 !important;
       }
     }
+
+    /* ==========================================================================
+       MOBILE / RESPONSIVO — apenas orientação horizontal (landscape)
+       ========================================================================== */
+
+    /* Overlay de orientação: bloqueia o site quando o aparelho está em pé (portrait) */
+    .orientation-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: var(--bg-color, #080d1a);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 28px;
+      gap: 14px;
+    }
+
+    .orientation-overlay .rotate-icon {
+      font-size: 64px;
+      line-height: 1;
+      animation: rotate-hint 1.8s ease-in-out infinite;
+    }
+
+    .orientation-overlay h2 {
+      font-family: var(--font-title);
+      font-size: 18px;
+      color: var(--text-primary);
+    }
+
+    .orientation-overlay p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      max-width: 280px;
+    }
+
+    @keyframes rotate-hint {
+      0%,
+      20% {
+        transform: rotate(0deg);
+      }
+
+      60%,
+      100% {
+        transform: rotate(90deg);
+      }
+    }
+
+    html,
+    body {
+      touch-action: manipulation;
+    }
+
+    /* Em telas pequenas em pé (portrait): mostra o aviso de girar o aparelho */
+    @media (max-width: 820px) and (orientation: portrait) {
+      .orientation-overlay {
+        display: flex;
+      }
+
+      .app-container {
+        display: none !important;
+      }
+    }
+
+    /* Em telas pequenas deitadas (landscape): layout compacto */
+    @media (max-width: 820px) and (orientation: landscape),
+    (max-height: 500px) {
+      .app-container {
+        grid-template-columns: 1fr 0px;
+        grid-template-rows: auto 1fr;
+      }
+
+      header {
+        padding: 6px 10px;
+      }
+
+      .logo-title h1 {
+        font-size: 15px;
+      }
+
+      .logo-title p {
+        font-size: 8px;
+      }
+
+      .top-controls .btn {
+        padding: 5px 8px;
+        font-size: 11px;
+      }
+
+      .top-controls .btn svg {
+        width: 12px;
+        height: 12px;
+      }
+
+      .main-content {
+        padding: 8px 12px 0 12px;
+      }
+
+      .slide-stage {
+        gap: 12px;
+        grid-template-columns: 1.2fr 1fr;
+        align-items: center;
+      }
+
+      .image-container {
+        max-height: calc(100vh - 140px);
+        aspect-ratio: auto;
+      }
+
+      .content-card {
+        max-height: calc(100vh - 140px);
+        padding: 12px 14px;
+        overflow-y: auto;
+      }
+
+      .content-card::before {
+        display: none;
+      }
+
+      .slide-title {
+        font-size: 16px;
+      }
+
+      .slide-subtitle {
+        font-size: 11px;
+      }
+
+      .bullet-item {
+        font-size: 12px;
+        margin-bottom: 4px;
+      }
+
+      .nav-bar {
+        padding: 4px 8px;
+      }
+    }
   </style>
 </head>
 
 <body>
+
+  <!-- Overlay: pede para girar o aparelho na horizontal (mobile) -->
+  <div class="orientation-overlay" id="orientationOverlay">
+    <div class="rotate-icon">📱</div>
+    <h2>Gire o aparelho</h2>
+    <p>Esta apresentação é otimizada para a posição horizontal. Vire o celular para continuar.</p>
+  </div>
 
   <div class="app-container" id="appContainer">
 
@@ -2743,7 +2889,28 @@
       }, 3500);
     }
 
-    // Configuração dos Atalhos do Teclado
+    // 11. ORIENTAÇÃO MOBILE (exige posição horizontal)
+function enforceOrientation() {
+  const overlay = document.getElementById('orientationOverlay');
+  if (!overlay) return;
+
+  const isSmallScreen = window.innerWidth <= 820;
+  const isLandscape = window.innerHeight < window.innerWidth;
+
+  if (isSmallScreen && !isLandscape) {
+    overlay.style.display = 'flex';
+  } else {
+    overlay.style.display = 'none';
+  }
+}
+
+window.addEventListener('resize', enforceOrientation);
+window.addEventListener('orientationchange', () => {
+  setTimeout(enforceOrientation, 250);
+});
+enforceOrientation();
+
+// Configuração dos Atalhos do Teclado
     function setupKeyboardShortcuts() {
       document.addEventListener('keydown', (e) => {
         // Ignora atalhos se o usuário estiver digitando no editor
