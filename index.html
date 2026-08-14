@@ -1619,6 +1619,74 @@
         padding: 4px 8px;
       }
     }
+
+    /* ==========================================================================
+       MENU DE DOWNLOAD (Modelo 3D STEP)
+       ========================================================================== */
+    .download-menu {
+      position: relative;
+      display: inline-block;
+    }
+
+    .download-dropdown {
+      display: none;
+      position: absolute;
+      top: calc(100% + 6px);
+      right: 0;
+      min-width: 240px;
+      background: var(--panel-bg, rgba(13, 22, 41, 0.98));
+      border: 1px solid var(--panel-border, rgba(59, 130, 246, 0.25));
+      border-radius: 12px;
+      box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(12px);
+      padding: 8px;
+      z-index: 500;
+    }
+
+    .download-dropdown.open {
+      display: block;
+    }
+
+    .download-heading {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted, #64748b);
+      padding: 6px 10px 8px 10px;
+      border-bottom: 1px solid var(--panel-border, rgba(59, 130, 246, 0.15));
+      margin-bottom: 6px;
+    }
+
+    .download-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 10px;
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--text-primary, #f8fafc);
+      font-size: 13px;
+      transition: background 0.2s ease;
+    }
+
+    .download-item:hover {
+      background: var(--accent-glow, rgba(59, 130, 246, 0.15));
+    }
+
+    .download-item .d-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--accent, #3b82f6), var(--success, #10b981));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 800;
+      font-size: 13px;
+      flex-shrink: 0;
+    }
   </style>
 </head>
 
@@ -1673,6 +1741,42 @@
           </svg>
           PDF
         </button>
+
+        <!-- Downloads de Modelo 3D (STEP) -->
+        <div class="download-menu">
+          <button class="btn btn-primary" onclick="toggleDownloadMenu(event)"
+            title="Baixar modelo 3D (arquivos STEP)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            Download 3D
+          </button>
+          <div class="download-dropdown" id="downloadDropdown">
+            <div class="download-heading">Modelo 3D — STEP</div>
+            <a class="download-item" href="downloads/Tampa_Hibrida_Cimed_v01.STEP" download>
+              <span class="d-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <path d="M21 16v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2" />
+                  <polyline points="7 10 12 15 17 10" />
+                  <line x1="12" y1="15" x2="12" y2="3" />
+                </svg>
+              </span>
+              <span>Batoque / Tampa Híbrida</span>
+            </a>
+            <a class="download-item" href="downloads/Frasco_Cimed_PE_Natural_Blender.STEP" download>
+              <span class="d-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <path d="M21 16v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2" />
+                  <polyline points="7 10 12 15 17 10" />
+                  <line x1="12" y1="15" x2="12" y2="3" />
+                </svg>
+              </span>
+              <span>Frasco (Flaconete 10 ml)</span>
+            </a>
+          </div>
+        </div>
 
         <button class="btn btn-primary" onclick="saveFile()"
           title="Salva as edições permanentemente no arquivo index.html">
@@ -2909,6 +3013,20 @@ window.addEventListener('orientationchange', () => {
   setTimeout(enforceOrientation, 250);
 });
 enforceOrientation();
+
+// 12. MENU DE DOWNLOAD (Modelo 3D STEP)
+function toggleDownloadMenu(e) {
+  if (e) e.stopPropagation();
+  const dd = document.getElementById('downloadDropdown');
+  if (dd) dd.classList.toggle('open');
+}
+
+document.addEventListener('click', (e) => {
+  const dd = document.getElementById('downloadDropdown');
+  if (dd && dd.classList.contains('open') && !e.target.closest('.download-menu')) {
+    dd.classList.remove('open');
+  }
+});
 
 // Configuração dos Atalhos do Teclado
     function setupKeyboardShortcuts() {
