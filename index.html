@@ -1751,14 +1751,6 @@
           Exportar Texto
         </button>
 
-        <button class="btn" onclick="window.print()" title="Imprimir apresentação ou Salvar como PDF">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
-            <rect x="6" y="14" width="12" height="8" />
-          </svg>
-          PDF
-        </button>
-
         <!-- Downloads de Modelo 3D (STEP) -->
         <div class="download-menu">
           <button class="btn btn-primary" onclick="toggleDownloadMenu(event)"
@@ -2475,6 +2467,70 @@
     ],
     "notes": "Com essa etapa concluída, encerramos a sequência de imagens do projeto. A tampa foi desenvolvida especificamente para este gargalo — cada detalhe foi pensado para essa interface.",
     "hudHighlights": ["diac", "alt", "diag", "altu", "bl-batoque"]
+  },
+  {
+    "id": "slide-14",
+    "title": "Especificações Dimensionais",
+    "subtitle": "Tabela de dados técnicos principais",
+    "image": "Tampa Híbrida Cimed render v26 100-256 frontal azul.png",
+    "bullets": [
+      "<strong>Diâmetro externo da tampa:</strong> 13,5 a 15,5 mm.",
+      "<strong>Altura total (incluindo lacre integrado):</strong> 7,5 mm.",
+      "<strong>Espessura da parede externa de proteção:</strong> 1,3 mm.",
+      "<strong>Diâmetro interno do gargalo (acoplamento flaconete):</strong> 8,7 mm.",
+      "<strong>Altura útil para vedação interna:</strong> 3,7 mm.",
+      "<strong>Massa estimada:</strong> 0,67 g (calculada no SolidWorks)."
+    ],
+    "notes": "Os valores representam o estágio de proposta CAD. A validação de moldabilidade e ensaios físicos definirá as tolerâncias finais.",
+    "hudHighlights": ["diac", "alt", "massa", "material"]
+  },
+  {
+    "id": "slide-15",
+    "title": "Sistema de Lacre — Construção",
+    "subtitle": "Detalhamento da câmara e pontes de ruptura",
+    "image": "Tampa Híbrida Cimed render v29 100-256 inferior azul.png",
+    "bullets": [
+      "<strong>Altura da câmara de cisalhamento:</strong> 1,00 mm.",
+      "<strong>Largura radial disponível:</strong> 0,20 mm.",
+      "<strong>Parede da saia da tampa:</strong> 0,80 mm.",
+      "<strong>Parede do anel do lacre inferior:</strong> 1,30 mm.",
+      "<strong>Altura da ancoragem axial do gargalo:</strong> 0,50 mm.",
+      "<strong>Pontes de ruptura axial:</strong> 12 (conexões de ruptura propostas)."
+    ],
+    "notes": "Intenção funcional: romper axialmente o lacre sem depender da rotação da rosca — a evidência de violação independe da abertura.",
+    "hudHighlights": ["pontes"]
+  },
+  {
+    "id": "slide-16",
+    "title": "Pista Helicoidal — Pequeno Giro",
+    "subtitle": "Cinemática de abertura por quick thread",
+    "image": "Tampa Híbrida Cimed render v32 100-256 helice pista entrada azul.png",
+    "bullets": [
+      "<strong>Passo da pista:</strong> aproximadamente 3,0 mm.",
+      "<strong>Giro:</strong> 90° (sequência de 4x 90° = 360°).",
+      "<strong>Levantamento axial suficiente:</strong> 1,0 a 1,5 mm para liberar a vedação.",
+      "<strong>Pistas:</strong> 4, com entradas cônicas que facilitam a montagem no espaço de 3,7 mm.",
+      "<strong>Geometria de rampa larga:</strong> dividida em 3 zonas (entrada guia, rampa de subida e batente final).",
+      "<strong>Sensação projetada:</strong> encaixa → comprime → trava → pequeno giro → libera."
+    ],
+    "notes": "O giro curto alivia a compressão do batoque enquanto o lacre se rompe simultaneamente por tração axial pura.",
+    "hudHighlights": ["rosca-passo", "rosca-prof", "altu"]
+  },
+  {
+    "id": "slide-17",
+    "title": "Ergonomia de Abertura e Dados Adicionais",
+    "subtitle": "Pegas, interfaces e resumo técnico",
+    "image": "Tampa Híbrida Cimed render v27 100-256 lateral azul.png",
+    "bullets": [
+      "<strong>Pega menor (polegar):</strong> aprox. 3 x 3 x 4 mm — atua como batente firme para o dedão.",
+      "<strong>Pega maior (tração):</strong> 4 x 4 x 4 mm — triangular com furo central (economia de material e resfriamento na injeção).",
+      "<strong>Indicação visual:</strong> relevo 'GIRE' + setas de movimento.",
+      "<strong>Rosca Quick Thread:</strong> passo grande (aprox. 3 mm) traduz a força das pegas em abertura com poucas voltas.",
+      "<strong>Arquivos 3D (STEP):</strong> Tampa_Hibrida_Cimed_v01.STEP e Frasco_Cimed_PE_Natural_Blender.STEP disponíveis para download.",
+      "<strong>Documentação:</strong> Ficha Técnica completa disponível em PDF na seção Download 3D."
+    ],
+    "notes": "Critério de sucesso: o usuário deve perceber travamento firme no fechamento e abertura de precisão com baixo esforço.",
+    "hudHighlights": ["rop", "material"]
   },
   {
     "id": "slide-13",
