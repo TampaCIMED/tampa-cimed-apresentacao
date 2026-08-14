@@ -596,6 +596,23 @@
       transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
+    .slide-video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: #000;
+    }
+
+    .image-container.has-video {
+      aspect-ratio: 16 / 9;
+      cursor: default;
+    }
+
+    .image-container.has-video:hover {
+      border-color: var(--panel-border-glow);
+      box-shadow: 0 16px 48px -8px rgba(0, 0, 0, 0.6), 0 0 20px rgba(59, 130, 246, 0.05);
+    }
+
     .image-container:hover .slide-img {
       transform: scale(1.02);
     }
@@ -1821,6 +1838,7 @@
         <!-- Lado Esquerdo: Imagem -->
         <div class="image-container" onclick="openZoom()" title="Clique para ampliar imagem">
           <img src="" alt="Render CIMED" class="slide-img" id="slideImg">
+          <video class="slide-video" id="slideVideo" controls playsinline poster="" style="display:none;"></video>
           <button class="btn-expand-image" onclick="event.stopPropagation(); openZoom();">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
               <polyline points="15 3 21 3 21 9" />
@@ -2455,6 +2473,19 @@
     ],
     "notes": "Com essa etapa concluída, encerramos a sequência de imagens do projeto. A tampa foi desenvolvida especificamente para este gargalo — cada detalhe foi pensado para essa interface.",
     "hudHighlights": ["diac", "alt", "diag", "altu", "bl-batoque"]
+  },
+  {
+    "id": "slide-13",
+    "title": "Vídeo — Animação do Produto",
+    "subtitle": "Apresentação em movimento do conceito",
+    "video": "videos/CIMED_Video_Final.mp4",
+    "image": "media/CIMED_Video_Thumb.jpg",
+    "bullets": [
+      "<strong>Visão geral:</strong> trajetória completa de apresentação do produto com iluminação controlada.",
+      "<strong>Detalhe:</strong> aproximação da câmera destacando o corpo, as abas e o lacre da tampa."
+    ],
+    "notes": "Este vídeo é uma renderização em Cycles de 1920×1080 a 24 fps, composto pela capa inicial, visão geral, transição suave e detalhe do produto.",
+    "hudHighlights": ["material", "cad"]
   }
 ]
   </script>
@@ -2536,6 +2567,25 @@
       document.getElementById('slideSubtitle').textContent = slide.subtitle;
       document.getElementById('slideTitle').textContent = slide.title;
       document.getElementById('slideNotes').textContent = slide.notes;
+
+      // Suporte a vídeo: se o slide tem 'video', mostra o player no lugar da imagem
+      const videoEl = document.getElementById('slideVideo');
+      const imgEl = document.getElementById('slideImg');
+      const stageEl = document.getElementById('slideStage');
+      const imgContainer = document.querySelector('.image-container');
+      if (slide.video) {
+        videoEl.src = slide.video;
+        videoEl.style.display = 'block';
+        imgEl.style.display = 'none';
+        if (imgContainer) imgContainer.classList.add('has-video');
+        void stageEl.offsetWidth;
+      } else {
+        videoEl.pause();
+        videoEl.removeAttribute('src');
+        videoEl.style.display = 'none';
+        imgEl.style.display = '';
+        if (imgContainer) imgContainer.classList.remove('has-video');
+      }
 
       // Renderiza Bullets com animação
       const bulletsContainer = document.getElementById('slideBullets');
