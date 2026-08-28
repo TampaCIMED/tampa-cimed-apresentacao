@@ -593,7 +593,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
     }
 
     .slide-video {
@@ -611,6 +611,23 @@
     .image-container.has-video:hover {
       border-color: var(--panel-border-glow);
       box-shadow: 0 16px 48px -8px rgba(0, 0, 0, 0.6), 0 0 20px rgba(59, 130, 246, 0.05);
+    }
+
+    .video-container {
+      grid-column: 1 / 2;
+      grid-row: 1 / 2;
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #000;
+      border: 1px solid var(--panel-border);
+      box-shadow: 0 12px 40px -10px rgba(0, 0, 0, 0.5);
+      aspect-ratio: 16 / 9;
+      width: 100%;
+      max-height: calc(100vh - 200px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .image-container:hover .slide-img {
@@ -684,6 +701,164 @@
       color: var(--text-primary);
       background: rgba(15, 23, 42, 0.95);
       border-color: var(--accent);
+    }
+
+    /* Gallery Navigation (Slide 18) */
+    .gallery-nav {
+      position: absolute;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 6px 12px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .gallery-nav.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .gallery-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(15, 23, 42, 0.35);
+      border: 1px solid rgba(15, 23, 42, 0.5);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      padding: 0;
+    }
+
+    .gallery-dot:hover {
+      background: rgba(15, 23, 42, 0.6);
+    }
+
+    .gallery-dot.active {
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent-glow);
+      transform: scale(1.2);
+    }
+
+    /* Indicador visual de navegação (← →) — apenas indicação, não bloqueia interação */
+    .gallery-arrows-hint {
+      position: absolute;
+      bottom: 54px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 30px;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      user-select: none;
+      font-size: 34px;
+      font-weight: 700;
+      line-height: 1;
+      color: rgba(255, 255, 255, 0.85);
+      text-shadow: 0 1px 6px rgba(0, 0, 0, 0.75);
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+
+    .gallery-arrows-hint.visible {
+      opacity: 1;
+    }
+
+    .gallery-label {
+      font-size: 10px;
+      color: var(--text-secondary);
+      font-weight: 500;
+      white-space: nowrap;
+      margin-left: 4px;
+    }
+
+    /* Multi-Image Grid (Slide 17) */
+    .multi-image-container {
+      display: none;
+      width: 100%;
+      height: 100%;
+      flex-direction: column;
+      gap: 8px;
+      padding: 8px;
+      pointer-events: none;
+    }
+
+    .multi-image-container.active {
+      display: flex;
+      pointer-events: auto;
+    }
+
+    .multi-image-main {
+      flex: 2;
+      min-height: 0;
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      background: rgba(0, 0, 0, 0.1);
+      border: 1px solid var(--panel-border);
+    }
+
+    .multi-image-main img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .multi-image-row {
+      display: flex;
+      gap: 8px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .multi-image-thumb {
+      flex: 1;
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      background: rgba(0, 0, 0, 0.1);
+      border: 1px solid var(--panel-border);
+    }
+
+    .multi-image-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .multi-image-label {
+      position: absolute;
+      bottom: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(4px);
+      font-size: 9px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      white-space: nowrap;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .concept-phrase {
+      text-align: center;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--accent);
+      padding: 8px 0 0 0;
+      font-style: italic;
     }
 
     /* Lado Direito: Cartão de Informações */
@@ -1635,6 +1810,22 @@
       .nav-bar {
         padding: 4px 8px;
       }
+
+      /* Multi-Image Mobile */
+      .multi-image-container {
+        gap: 4px;
+        padding: 4px;
+      }
+
+      .multi-image-label {
+        font-size: 7px;
+        padding: 2px 5px;
+      }
+
+      .concept-phrase {
+        font-size: 11px;
+        padding: 4px 0 0 0;
+      }
     }
 
     /* ==========================================================================
@@ -1832,7 +2023,22 @@
         <!-- Lado Esquerdo: Imagem -->
         <div class="image-container" onclick="openZoom()" title="Clique para ampliar imagem">
           <img src="" alt="Render CIMED" class="slide-img" id="slideImg">
-          <video class="slide-video" id="slideVideo" controls playsinline poster="" style="display:none;"></video>
+          <div class="multi-image-container" id="multiImageContainer">
+            <div class="multi-image-main">
+              <img src="" alt="Comparação Superior" id="multiImgMain">
+              <span class="multi-image-label" id="multiLabelMain">Comparação Superior</span>
+            </div>
+            <div class="multi-image-row">
+              <div class="multi-image-thumb">
+                <img src="" alt="Tampa Atual" id="multiImgThumb1">
+                <span class="multi-image-label">Tampa Atual</span>
+              </div>
+              <div class="multi-image-thumb">
+                <img src="" alt="Tampa Batoque Híbrida" id="multiImgThumb2">
+                <span class="multi-image-label">Tampa Batoque Híbrida</span>
+              </div>
+            </div>
+          </div>
           <button class="btn-expand-image" onclick="event.stopPropagation(); openZoom();">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
               <polyline points="15 3 21 3 21 9" />
@@ -1841,6 +2047,19 @@
               <line x1="3" y1="21" x2="10" y2="14" />
             </svg>
           </button>
+          <div class="gallery-nav" id="galleryNav">
+            <button class="gallery-dot active" data-index="0" onclick="event.preventDefault(); event.stopPropagation(); switchGalleryImage(0);"></button>
+            <button class="gallery-dot" data-index="1" onclick="event.preventDefault(); event.stopPropagation(); switchGalleryImage(1);"></button>
+            <button class="gallery-dot" data-index="2" onclick="event.preventDefault(); event.stopPropagation(); switchGalleryImage(2);"></button>
+          </div>
+          <div class="gallery-arrows-hint" id="galleryArrowsHint" aria-hidden="true">
+            <span>&larr;</span><span>&rarr;</span>
+          </div>
+        </div>
+
+        <!-- Lado Esquerdo: Vídeo (compartilha a mesma área da imagem) -->
+        <div class="video-container" id="videoContainer" style="display:none;">
+          <video class="slide-video" id="slideVideo" controls playsinline poster=""></video>
         </div>
 
         <!-- Lado Direito: Conteúdo do Slide -->
@@ -1865,6 +2084,8 @@
             </div>
             <span id="slideNotes"></span>
           </div>
+
+          <div class="concept-phrase" id="conceptPhrase" style="display:none;"></div>
         </div>
       </div>
 
@@ -2486,54 +2707,49 @@
   },
   {
     "id": "slide-15",
-    "title": "Sistema de Lacre — Construção",
-    "subtitle": "Detalhamento da câmara e pontes de ruptura",
-    "image": "Tampa Híbrida Cimed render v29 100-256 inferior azul.png",
-    "bullets": [
-      "<strong>Altura da câmara de cisalhamento:</strong> 1,00 mm.",
-      "<strong>Largura radial disponível:</strong> 0,20 mm.",
-      "<strong>Parede da saia da tampa:</strong> 0,80 mm.",
-      "<strong>Parede do anel do lacre inferior:</strong> 1,30 mm.",
-      "<strong>Altura da ancoragem axial do gargalo:</strong> 0,50 mm.",
-      "<strong>Pontes de ruptura axial:</strong> 12 (conexões de ruptura propostas)."
+    "title": "Comparação Visual",
+    "subtitle": "Vista Frontal — Tampa Atual × Tampa Batoque Híbrida",
+    "image": "COMPARATIVO_CIMED_TAMPA_ATUAL_vs_TAMPA_BATOQUE_HIBRIDA_VISTA_FRONTAL_RV01.png",
+    "images": [
+      "COMPARATIVO_CIMED_TAMPA_ATUAL_vs_TAMPA_BATOQUE_HIBRIDA_VISTA_FRONTAL_RV01.png",
+      "TAMPA_ATUAL_CIMED_VISTA_FRONTAL_RV01.png",
+      "TAMPA_BATOQUE_HIBRIDA_CIMED_VISTA_FRONTAL_RV01.png"
     ],
-    "notes": "Intenção funcional: romper axialmente o lacre sem depender da rotação da rosca — a evidência de violação independe da abertura.",
-    "hudHighlights": ["pontes"]
+    "imageLabels": ["Comparação Frontal", "Tampa Atual", "Tampa Batoque Híbrida"],
+    "bullets": [
+      "A comparação visual evidencia a diferença de arquitetura entre a tampa atualmente utilizada e a proposta de Tampa Batoque Híbrida desenvolvida para o flaconete CIMED.",
+      "A análise é apresentada sob a mesma condição visual, permitindo observar diretamente as diferenças de geometria, proporção, sistema de fechamento, lacre e arquitetura externa.",
+      "A proposta híbrida busca integrar as funções de proteção, lacre e fechamento em uma única solução, mantendo uma arquitetura adequada ao processo de transformação plástica.",
+      "<strong>Objetivo:</strong> tornar visualmente evidente a evolução da solução proposta em relação à tampa atual."
+    ],
+    "notes": "Render frontal comparativo produzido em ambiente Cycles com iluminação controlada e fundo branco. As duas tampa estão apresentadas na mesma escala e condição de câmera.",
+    "hudHighlights": ["material", "cad"]
   },
   {
     "id": "slide-16",
-    "title": "Pista Helicoidal — Pequeno Giro",
-    "subtitle": "Cinemática de abertura por quick thread",
-    "image": "Tampa Híbrida Cimed render v32 100-256 helice pista entrada azul.png",
-    "bullets": [
-      "<strong>Passo da pista:</strong> aproximadamente 3,0 mm.",
-      "<strong>Giro:</strong> 90° (sequência de 4x 90° = 360°).",
-      "<strong>Levantamento axial suficiente:</strong> 1,0 a 1,5 mm para liberar a vedação.",
-      "<strong>Pistas:</strong> 4, com entradas cônicas que facilitam a montagem no espaço de 3,7 mm.",
-      "<strong>Geometria de rampa larga:</strong> dividida em 3 zonas (entrada guia, rampa de subida e batente final).",
-      "<strong>Sensação projetada:</strong> encaixa → comprime → trava → pequeno giro → libera."
+    "title": "A geometria revela o que a montagem oculta.",
+    "subtitle": "Vista superior — Tampa Atual × Tampa Batoque Híbrida",
+    "image": "COMPARATIVO_CIMED_TAMPA_ATUAL_vs_TAMPA_BATOQUE_HIBRIDA_VISTA_SUPERIOR_RV01.png",
+    "images": [
+      "COMPARATIVO_CIMED_TAMPA_ATUAL_vs_TAMPA_BATOQUE_HIBRIDA_VISTA_SUPERIOR_RV01.png",
+      "TAMPA_ATUAL_CIMED_VISTA_SUPERIOR_RV01.png",
+      "TAMPA_BATOQUE_HIBRIDA_CIMED_VISTA_SUPERIOR_RV01.png"
     ],
-    "notes": "O giro curto alivia a compressão do batoque enquanto o lacre se rompe simultaneamente por tração axial pura.",
-    "hudHighlights": ["rosca-passo", "rosca-prof", "altu"]
+    "imageLabels": ["Comparação Superior", "Tampa Atual", "Tampa Batoque Híbrida"],
+    "bullets": [
+      "Nem tudo o que uma solução faz pode ser percebido quando o produto está completamente montado.",
+      "A vista superior permite revelar uma relação que normalmente permanece escondida: a região do flaconete que fica fisicamente protegida pela saia da tampa.",
+      "Ao observar a montagem e, depois, as duas soluções individualmente, o olhar passa a compreender não apenas <strong>o que mudou</strong>, mas também <strong>o que a nova arquitetura passa a proteger</strong>.",
+      "<strong>Área Protegida → Região de Abertura → Região de Consumo</strong> — Três regiões distintas, relacionadas pela própria arquitetura da tampa.",
+      "A <strong>Área Protegida</strong> permanece resguardada pela saia. A <strong>Região de Abertura</strong> concentra a interação necessária para a abertura do sistema. A <strong>Região de Consumo</strong> corresponde à área que posteriormente entra em contato com a boca.",
+      "A proposta não trata essas regiões como elementos isolados. A arquitetura da Tampa Batoque Híbrida cria entre elas uma relação física, funcional e intencional."
+    ],
+    "notes": "A área em laranja é uma representação visual utilizada apenas para criar contraste e tornar perceptível a região do flaconete que fica fisicamente encoberta pela saia da tampa.",
+    "hudHighlights": ["material", "cad"],
+    "conceptPhrase": "O que a tampa protege sem deixar você ver?"
   },
   {
     "id": "slide-17",
-    "title": "Ergonomia de Abertura e Dados Adicionais",
-    "subtitle": "Pegas, interfaces e resumo técnico",
-    "image": "Tampa Híbrida Cimed render v27 100-256 lateral azul.png",
-    "bullets": [
-      "<strong>Pega menor (polegar):</strong> aprox. 3 x 3 x 4 mm — atua como batente firme para o dedão.",
-      "<strong>Pega maior (tração):</strong> 4 x 4 x 4 mm — triangular com furo central (economia de material e resfriamento na injeção).",
-      "<strong>Indicação visual:</strong> relevo 'GIRE' + setas de movimento.",
-      "<strong>Rosca Quick Thread:</strong> passo grande (aprox. 3 mm) traduz a força das pegas em abertura com poucas voltas.",
-      "<strong>Arquivos 3D (STEP):</strong> Tampa_Hibrida_Cimed_v01.STEP e Frasco_Cimed_PE_Natural_Blender.STEP disponíveis para download.",
-      "<strong>Documentação:</strong> Ficha Técnica completa disponível em PDF na seção Download 3D."
-    ],
-    "notes": "Critério de sucesso: o usuário deve perceber travamento firme no fechamento e abertura de precisão com baixo esforço.",
-    "hudHighlights": ["rop", "material"]
-  },
-  {
-    "id": "slide-13",
     "title": "Vídeo — Animação do Produto",
     "subtitle": "Apresentação em movimento do conceito",
     "video": "videos/CIMED_Video_Final.mp4",
@@ -2581,26 +2797,25 @@
       slideshowSpeed = 60000;
     });
 
-    // 1. CARREGAMENTO DOS DADOS (localStorage ou Embutido)
+    // 1. CARREGAMENTO DOS DADOS (slide-data embutido é a fonte principal)
     function loadSlideData() {
-      const savedData = localStorage.getItem('cimed-presentation-slides');
-      if (savedData) {
-        try {
-          slides = JSON.parse(savedData);
-          showToast('Edições locais carregadas da memória do navegador.');
-          return;
-        } catch (e) {
-          console.error("Erro ao carregar dados do localStorage, revertendo para padrão.", e);
-        }
-      }
-
-      // Carrega dados embutidos no script tag
       const jsonScript = document.getElementById('slide-data');
       if (jsonScript) {
         try {
           slides = JSON.parse(jsonScript.textContent);
+          return;
         } catch (e) {
           console.error("Erro ao fazer parse dos dados embutidos", e);
+        }
+      }
+
+      // Fallback somente se o slide-data embutido estiver indisponível
+      const savedData = localStorage.getItem('cimed-presentation-slides');
+      if (savedData) {
+        try {
+          slides = JSON.parse(savedData);
+        } catch (e) {
+          console.error("Erro ao carregar dados do localStorage.", e);
         }
       }
     }
@@ -2621,7 +2836,8 @@
       const slide = slides[index];
 
       // Atualiza Elementos do Slide
-      document.getElementById('slideImg').src = slide.image;
+      const galleryImgIndex = (slide.images && slide.images.length > 0) ? Math.min(currentGalleryIndex, slide.images.length - 1) : 0;
+      document.getElementById('slideImg').src = (slide.images && slide.images.length > 0) ? slide.images[galleryImgIndex] : slide.image;
       document.getElementById('slideSubtitle').textContent = slide.subtitle;
       document.getElementById('slideTitle').textContent = slide.title;
       document.getElementById('slideNotes').textContent = slide.notes;
@@ -2631,18 +2847,23 @@
       const imgEl = document.getElementById('slideImg');
       const stageEl = document.getElementById('slideStage');
       const imgContainer = document.querySelector('.image-container');
+      const videoContainer = document.getElementById('videoContainer');
       if (slide.video) {
+        if (imgContainer) imgContainer.style.display = 'none';
+        if (videoContainer) videoContainer.style.display = 'flex';
         videoEl.src = slide.video;
+        videoEl.poster = slide.image;
         videoEl.style.display = 'block';
         imgEl.style.display = 'none';
-        if (imgContainer) imgContainer.classList.add('has-video');
         void stageEl.offsetWidth;
       } else {
+        if (imgContainer) imgContainer.style.display = '';
+        if (videoContainer) videoContainer.style.display = 'none';
         videoEl.pause();
         videoEl.removeAttribute('src');
+        videoEl.removeAttribute('poster');
         videoEl.style.display = 'none';
         imgEl.style.display = '';
-        if (imgContainer) imgContainer.classList.remove('has-video');
       }
 
       // Renderiza Bullets com animação
@@ -2665,6 +2886,16 @@
 
       // Atualiza Destaques no HUD Técnico
       updateHUDHighlights(slide.hudHighlights);
+
+      // Atualiza Navegação da Galeria (para slides com múltiplas imagens)
+      updateGalleryNav(slide);
+      updateArrowsHint();
+
+      // Atualiza Layout Multi-Imagem (para slides com multiImage: true)
+      updateMultiImageLayout(slide);
+
+      // Atualiza Frase Conceitual
+      updateConceptPhrase(slide);
 
       // Atualiza Marcadores de Estado e Lista Lateral
       document.getElementById('slideCounter').textContent = `${index + 1} / ${slides.length}`;
@@ -2689,14 +2920,26 @@
     }
 
     function prevSlide() {
-      if (currentSlideIndex > 0) {
-        showSlide(currentSlideIndex - 1);
-      } else {
-        showSlide(slides.length - 1); // Loop para o final
+      const slide = slides[currentSlideIndex];
+      if (slide.images && slide.images.length > 1 && currentGalleryIndex > 0) {
+        switchGalleryImage(currentGalleryIndex - 1);
+        return;
       }
+      const prevIndex = currentSlideIndex > 0 ? currentSlideIndex - 1 : slides.length - 1;
+      const prevSlideData = slides[prevIndex];
+      currentGalleryIndex = (prevSlideData.images && prevSlideData.images.length > 0)
+        ? prevSlideData.images.length - 1
+        : 0;
+      showSlide(prevIndex);
     }
 
     function nextSlide() {
+      const slide = slides[currentSlideIndex];
+      if (slide.images && slide.images.length > 1 && currentGalleryIndex < slide.images.length - 1) {
+        switchGalleryImage(currentGalleryIndex + 1);
+        return;
+      }
+      currentGalleryIndex = 0;
       if (currentSlideIndex < slides.length - 1) {
         showSlide(currentSlideIndex + 1);
       } else {
@@ -3060,14 +3303,99 @@
       }
     }
 
-    // 10. LIGHTBOX & FULLSCREEN MODALS
+    // 10. IMAGE GALLERY (Slide 18)
+    let currentGalleryIndex = 0;
+
+    function switchGalleryImage(index) {
+      const slide = slides[currentSlideIndex];
+      if (!slide.images || !slide.images[index]) return;
+
+      currentGalleryIndex = index;
+      const imgEl = document.getElementById('slideImg');
+      const dots = document.querySelectorAll('.gallery-dot');
+
+      imgEl.src = slide.images[index];
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === index);
+      });
+      updateArrowsHint();
+    }
+
+    function updateGalleryNav(slide) {
+      const galleryNav = document.getElementById('galleryNav');
+      if (slide.images && slide.images.length > 1) {
+        galleryNav.style.display = 'flex';
+        galleryNav.classList.add('visible');
+        if (currentGalleryIndex >= slide.images.length) currentGalleryIndex = 0;
+        const dots = galleryNav.querySelectorAll('.gallery-dot');
+        dots.forEach((dot, i) => {
+          dot.classList.toggle('active', i === currentGalleryIndex);
+        });
+      } else {
+        galleryNav.style.display = 'none';
+        galleryNav.classList.remove('visible');
+      }
+    }
+
+    // Indicador visual (← →) exibido apenas nas Fotos 02 e 03 das galerias
+    function updateArrowsHint() {
+      const hint = document.getElementById('galleryArrowsHint');
+      if (!hint) return;
+      const slide = slides[currentSlideIndex];
+      const show = !!(slide.images && slide.images.length > 1 && (currentGalleryIndex === 1 || currentGalleryIndex === 2));
+      hint.classList.toggle('visible', show);
+    }
+
+    // 10b. MULTI-IMAGE LAYOUT (Slide 17)
+    function updateMultiImageLayout(slide) {
+      const multiContainer = document.getElementById('multiImageContainer');
+      const singleImg = document.getElementById('slideImg');
+      const expandBtn = document.querySelector('.btn-expand-image');
+
+      if (slide.multiImage && slide.images && slide.images.length >= 3) {
+        // Show multi-image layout
+        multiContainer.classList.add('active');
+        singleImg.style.display = 'none';
+        expandBtn.style.display = 'none';
+
+        // Set images
+        document.getElementById('multiImgMain').src = slide.images[0];
+        document.getElementById('multiImgThumb1').src = slide.images[1];
+        document.getElementById('multiImgThumb2').src = slide.images[2];
+
+        // Set labels
+        if (slide.imageLabels) {
+          document.getElementById('multiLabelMain').textContent = slide.imageLabels[0];
+        }
+      } else {
+        // Show single image layout
+        multiContainer.classList.remove('active');
+        singleImg.style.display = '';
+        expandBtn.style.display = '';
+      }
+    }
+
+    // 10c. CONCEPT PHRASE
+    function updateConceptPhrase(slide) {
+      const phraseEl = document.getElementById('conceptPhrase');
+      if (slide.conceptPhrase) {
+        phraseEl.textContent = slide.conceptPhrase;
+        phraseEl.style.display = 'block';
+      } else {
+        phraseEl.style.display = 'none';
+      }
+    }
+
+    // 11. LIGHTBOX & FULLSCREEN MODALS
     function openZoom() {
+      const slide = slides[currentSlideIndex];
+      if (slide.video) return; // o slide de vídeo não abre o zoom das imagens
       const lightbox = document.getElementById('imageLightbox');
       const lightboxImg = document.getElementById('lightboxImg');
       const lightboxCaption = document.getElementById('lightboxCaption');
-      const slide = slides[currentSlideIndex];
+      const imageSrc = slide.images && slide.images.length > 0 ? slide.images[currentGalleryIndex] : slide.image;
 
-      lightboxImg.src = slide.image;
+      lightboxImg.src = imageSrc;
       lightboxCaption.innerHTML = `<strong>${slide.title}</strong> — ${slide.subtitle} (${slide.image})`;
       lightbox.style.display = 'flex';
     }
@@ -3138,6 +3466,20 @@ document.addEventListener('click', (e) => {
 
 // Configuração dos Atalhos do Teclado
     function setupKeyboardShortcuts() {
+      // Navega o carrossel DENTRO do zoom usando o mesmo currentGalleryIndex do carrossel principal
+      function navigateZoomGallery(direction) {
+        const lightbox = document.getElementById('imageLightbox');
+        if (lightbox.style.display !== 'flex') return false;
+        const slide = slides[currentSlideIndex];
+        if (!slide.images || slide.images.length <= 1) return false;
+        let idx = currentGalleryIndex + direction;
+        if (idx < 0) idx = 0;
+        if (idx > slide.images.length - 1) idx = slide.images.length - 1;
+        switchGalleryImage(idx); // sincroniza o carrossel principal (imagem + dots)
+        document.getElementById('lightboxImg').src = slide.images[idx];
+        return true;
+      }
+
       document.addEventListener('keydown', (e) => {
         // Ignora atalhos se o usuário estiver digitando no editor
         if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA') {
@@ -3149,10 +3491,10 @@ document.addEventListener('click', (e) => {
 
         if (e.key === 'ArrowRight' || e.key === ' ') {
           e.preventDefault();
-          nextSlide();
+          if (!navigateZoomGallery(1)) nextSlide();
         } else if (e.key === 'ArrowLeft') {
           e.preventDefault();
-          prevSlide();
+          if (!navigateZoomGallery(-1)) prevSlide();
         } else if (e.key === 'p' || e.key === 'P') {
           toggleSlideshow();
         } else if (e.key === 'f' || e.key === 'F') {
