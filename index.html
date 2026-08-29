@@ -2019,6 +2019,15 @@
       flex-shrink: 0;
     }
   </style>
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SFEWBVVG0L"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-SFEWBVVG0L');
+  </script>
 </head>
 
 <body>
@@ -3004,6 +3013,14 @@
 
       currentSlideIndex = index;
       const slide = slides[index];
+
+      // Google Analytics 4 — registra a visualização de cada slide
+      if (typeof gtag === 'function') {
+        gtag('event', 'slide_view', {
+          slide_number: index + 1,
+          slide_title: slide.title
+        });
+      }
 
       // Atualiza Elementos do Slide
       const galleryImgIndex = (slide.images && slide.images.length > 0) ? Math.min(currentGalleryIndex, slide.images.length - 1) : 0;
