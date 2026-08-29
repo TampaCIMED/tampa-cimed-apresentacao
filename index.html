@@ -961,6 +961,73 @@
       gap: 6px;
     }
 
+    .ack-name {
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+      letter-spacing: 0.01em;
+    }
+
+    .ack-text {
+      white-space: pre-line;
+      line-height: 1.55;
+      opacity: 0.92;
+    }
+
+    .team-section {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 2px;
+    }
+
+    .team-block {
+      padding: 10px 14px;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 8px;
+      border-left: 3px solid var(--accent);
+    }
+
+    .team-name {
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+      letter-spacing: 0.01em;
+    }
+
+    .team-text {
+      font-size: 12px;
+      line-height: 1.5;
+      color: var(--text-secondary);
+      white-space: pre-line;
+    }
+
+    .valor-section {
+      margin-top: 6px;
+      padding: 14px 16px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 10px;
+      border: 1px solid var(--panel-border);
+    }
+
+    .valor-title {
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 12px;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .valor-text {
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 1.5;
+      color: var(--text-primary);
+    }
+
     /* Barra de Navegação Inferior — agora dentro do main-content */
     .nav-bar {
       width: 100%;
@@ -1404,6 +1471,15 @@
       max-width: 100%;
       max-height: 85vh;
       object-fit: contain;
+      touch-action: none;
+      user-select: none;
+      -webkit-user-select: none;
+      transform-origin: center center;
+      cursor: grab;
+    }
+
+    .lightbox-img:active {
+      cursor: grabbing;
     }
 
     .lightbox-caption {
@@ -1417,6 +1493,7 @@
       font-size: 14px;
       font-weight: 500;
       text-align: center;
+      pointer-events: none;
     }
 
     .lightbox-close {
@@ -1439,6 +1516,52 @@
     .lightbox-close:hover {
       background: rgba(255, 255, 255, 0.2);
       transform: scale(1.1);
+    }
+
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 30;
+      pointer-events: auto;
+      transition: background 0.2s, transform 0.2s;
+      padding: 0;
+    }
+
+    .lightbox-nav:hover {
+      background: rgba(255, 255, 255, 0.22);
+      transform: translateY(-50%) scale(1.08);
+    }
+
+    .lightbox-prev {
+      left: 24px;
+    }
+
+    .lightbox-next {
+      right: 24px;
+    }
+
+    @media (max-width: 820px) {
+      .lightbox-nav {
+        width: 58px;
+        height: 58px;
+      }
+      .lightbox-prev {
+        left: 8px;
+      }
+      .lightbox-next {
+        right: 8px;
+      }
     }
 
     /* Modal Genérico (Aviso / Ajuda) */
@@ -2074,7 +2197,7 @@
           </div>
 
           <div class="slide-notes-box" id="slideNotesBox">
-            <div class="slide-notes-title">
+            <div class="slide-notes-title" id="slideNotesTitle">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                 <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
                 <line x1="12" y1="9" x2="12" y2="13" />
@@ -2084,6 +2207,10 @@
             </div>
             <span id="slideNotes"></span>
           </div>
+
+          <div class="team-section" id="teamSection" style="display:none;"></div>
+
+          <div class="valor-section" id="valorSection" style="display:none;"></div>
 
           <div class="concept-phrase" id="conceptPhrase" style="display:none;"></div>
         </div>
@@ -2467,6 +2594,16 @@
         <line x1="6" y1="6" x2="18" y2="18" />
       </svg>
     </div>
+    <button class="lightbox-nav lightbox-prev" id="lightboxPrevNav" type="button" aria-label="Imagem anterior">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <polyline points="15 18 9 12 15 6" />
+      </svg>
+    </button>
+    <button class="lightbox-nav lightbox-next" id="lightboxNextNav" type="button" aria-label="Próxima imagem">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <polyline points="9 18 15 12 9 6" />
+      </svg>
+    </button>
     <div class="lightbox-content" onclick="event.stopPropagation()">
       <img src="" alt="" class="lightbox-img" id="lightboxImg">
       <div class="lightbox-caption" id="lightboxCaption"></div>
@@ -2760,6 +2897,39 @@
     ],
     "notes": "Este vídeo é uma renderização em Cycles de 1920×1080 a 24 fps, composto pela capa inicial, visão geral, transição suave e detalhe do produto.",
     "hudHighlights": ["material", "cad"]
+  },
+  {
+    "id": "slide-18",
+    "title": "Equipe e Agradecimentos",
+    "subtitle": "Reconhecimento, transparência, autoria e propósito",
+    "image": "Gemini_Generated_Image_tuiyuituiyuituiy.jpg",
+    "bullets": [],
+    "ackBlocks": [
+      {
+        "name": "01 — Edgar Bezerril",
+        "text": "Idealização, modelagem, concepção do problema, desenvolvimento da solução e coordenação do projeto. A experiência em transformação plástica no segmento de injeção plástica permitiu compreender o problema em profundidade e conduzir a solução até este nível de resolução."
+      },
+      {
+        "name": "02 — OpenAI (ChatGPT)",
+        "text": "Apoio técnico, estruturação de informações, documentação e organização do conteúdo."
+      },
+      {
+        "name": "03 — OpenCode + DeepSeek V4",
+        "text": "Suporte à automação, renderização, integração com Blender e publicação no GitHub."
+      },
+      {
+        "name": "04 — Thiago Vulgo Toguro",
+        "text": "Pela autenticidade, coragem de ser verdadeiro e pela capacidade de criar conexões com pessoas de diferentes áreas. Sua atuação junto à CIMED, mesmo vindo de um universo diferente do farmacêutico, mostrou como conexões genuínas podem aproximar pessoas, ideias e oportunidades."
+      },
+      {
+        "name": "05 — CIMED",
+        "text": "Pelo seu modelo de negócio e pelo ambiente criado a partir dessas conexões, que permitiram a abertura de uma janela para que este projeto pudesse existir e chegar até este momento."
+      }
+    ],
+    "ackClosing": "Meu objetivo é encontrar onde existe valor que ainda não está sendo percebido, torná-lo visível e transformá-lo em possibilidade.\n\nPorque é nesse valor que encontro o meu próprio valor.",
+    "notes": "",
+    "hudHighlights": [],
+    "conceptPhrase": ""
   }
 ]
   </script>
@@ -2840,7 +3010,33 @@
       document.getElementById('slideImg').src = (slide.images && slide.images.length > 0) ? slide.images[galleryImgIndex] : slide.image;
       document.getElementById('slideSubtitle').textContent = slide.subtitle;
       document.getElementById('slideTitle').textContent = slide.title;
-      document.getElementById('slideNotes').textContent = slide.notes;
+      const notesBoxEl = document.getElementById('slideNotesBox');
+      const notesTitleEl = document.getElementById('slideNotesTitle');
+      const notesEl = document.getElementById('slideNotes');
+      const teamEl = document.getElementById('teamSection');
+      const valorEl = document.getElementById('valorSection');
+
+      // Área ENGENHARIA (seção independente — conteúdo original em slide.notes)
+      if (notesTitleEl) { notesTitleEl.style.display = ''; notesTitleEl.textContent = 'Observações / Engenharia'; }
+      notesEl.textContent = slide.notes || '';
+      if (notesBoxEl) notesBoxEl.style.display = (slide.notes && slide.notes.trim()) ? '' : 'none';
+
+      // Área EQUIPE E AGRADECIMENTOS (seção independente, fora da Engenharia)
+      if (slide.ackBlocks && slide.ackBlocks.length) {
+        let teamHtml = '';
+        slide.ackBlocks.forEach(block => {
+          teamHtml += `<div class="team-block"><div class="team-name">${block.name}</div><div class="team-text">${block.text}</div></div>`;
+        });
+        if (teamEl) { teamEl.innerHTML = teamHtml; teamEl.style.display = ''; }
+      } else if (teamEl) { teamEl.style.display = 'none'; }
+
+      // Área VALOR (seção independente de encerramento, fora da Engenharia)
+      if (slide.ackClosing) {
+        if (valorEl) {
+          valorEl.innerHTML = `<div class="valor-title">VALOR</div><div class="valor-text">${slide.ackClosing.replace(/\n/g, '<br>')}</div>`;
+          valorEl.style.display = '';
+        }
+      } else if (valorEl) { valorEl.style.display = 'none'; }
 
       // Suporte a vídeo: se o slide tem 'video', mostra o player no lugar da imagem
       const videoEl = document.getElementById('slideVideo');
@@ -3387,6 +3583,20 @@
     }
 
     // 11. LIGHTBOX & FULLSCREEN MODALS
+    // Estado do zoom/pan do visualizador de imagens
+    let lbScale = 1, lbX = 0, lbY = 0;
+    const lbPointers = new Map();
+    let lbPinchStartDist = 0, lbPinchStartScale = 1, lbPinchLastMid = null;
+    let lbPanStart = null, lbSwipeStart = null;
+
+    function lbApplyTransform() {
+      const img = document.getElementById('lightboxImg');
+      img.style.transform = `translate(${lbX}px, ${lbY}px) scale(${lbScale})`;
+    }
+    function lbResetZoom() {
+      lbScale = 1; lbX = 0; lbY = 0; lbApplyTransform();
+    }
+
     function openZoom() {
       const slide = slides[currentSlideIndex];
       if (slide.video) return; // o slide de vídeo não abre o zoom das imagens
@@ -3396,13 +3606,169 @@
       const imageSrc = slide.images && slide.images.length > 0 ? slide.images[currentGalleryIndex] : slide.image;
 
       lightboxImg.src = imageSrc;
-      lightboxCaption.innerHTML = `<strong>${slide.title}</strong> — ${slide.subtitle} (${slide.image})`;
+      lightboxCaption.innerHTML = `<strong>${slide.title}</strong> — ${slide.subtitle}`;
+      lbResetZoom();
       lightbox.style.display = 'flex';
+      const ov = document.getElementById('orientationOverlay');
+      if (ov) ov.style.display = 'none';
     }
 
     function closeZoom() {
       document.getElementById('imageLightbox').style.display = 'none';
+      lbResetZoom();
+      if (typeof enforceOrientation === 'function') enforceOrientation();
     }
+
+    // Navegação pelas setas/gestos do visualizador (galeria do slide ou slides)
+    function zoomNavigate(direction) {
+      const lightbox = document.getElementById('imageLightbox');
+      if (lightbox.style.display !== 'flex') return;
+      const slide = slides[currentSlideIndex];
+      if (!slide) return;
+      try {
+        if (slide.images && slide.images.length > 1) {
+          const count = slide.images.length;
+          if (count === 3) {
+            // Slide de 3 fotos: sem loop — nas bordas fecha o zoom e avança/retrocede o slide
+            let idx = currentGalleryIndex + direction;
+            if (idx < 0) {
+              lbResetZoom();
+              closeZoom();
+              const h = document.getElementById('galleryArrowsHint');
+              if (h) h.classList.remove('visible');
+              prevSlide();
+              return;
+            }
+            if (idx > count - 1) {
+              lbResetZoom();
+              closeZoom();
+              const h = document.getElementById('galleryArrowsHint');
+              if (h) h.classList.remove('visible');
+              nextSlide();
+              return;
+            }
+            currentGalleryIndex = idx;
+          } else {
+            // Demais galerias: mantém o loop original
+            let idx = currentGalleryIndex + direction;
+            if (idx < 0) idx = count - 1;
+            else if (idx > count - 1) idx = 0;
+            currentGalleryIndex = idx;
+          }
+          // Atualiza DIRETAMENTE a imagem do modal (sem depender de outra função)
+          const limg = document.getElementById('lightboxImg');
+          if (limg) limg.src = slide.images[currentGalleryIndex];
+          // Sincroniza também a imagem e os marcadores da vista principal
+          const mainImg = document.getElementById('slideImg');
+          if (mainImg) mainImg.src = slide.images[currentGalleryIndex];
+          const dots = document.querySelectorAll('.gallery-dot');
+          if (dots) dots.forEach((dot, i) => dot.classList.toggle('active', i === currentGalleryIndex));
+          const hint = document.getElementById('galleryArrowsHint');
+          if (hint) hint.classList.toggle('visible', !!(count > 1 && (currentGalleryIndex === 1 || currentGalleryIndex === 2)));
+        } else {
+          if (direction > 0) nextSlide(); else prevSlide();
+          const s = slides[currentSlideIndex];
+          const src = (s.images && s.images.length) ? s.images[currentGalleryIndex] : s.image;
+          const limg = document.getElementById('lightboxImg');
+          if (limg) limg.src = src;
+          const cap = document.getElementById('lightboxCaption');
+          if (cap) cap.innerHTML = `<strong>${s.title}</strong> — ${s.subtitle}`;
+        }
+        lbResetZoom();
+      } catch (err) {
+        console.error('zoomNavigate error:', err);
+      }
+    }
+
+    // --- Interação do visualizador: pinch-to-zoom, pan e swipe (mobile + desktop) ---
+    (function setupLightboxInteractions() {
+      const img = document.getElementById('lightboxImg');
+      if (!img) return;
+
+      img.addEventListener('pointerdown', (e) => {
+        img.setPointerCapture(e.pointerId);
+        lbPointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+        if (lbPointers.size === 1) {
+          if (lbScale > 1) {
+            lbPanStart = { x: e.clientX, y: e.clientY, ox: lbX, oy: lbY };
+          } else if (e.pointerType === 'touch') {
+            lbSwipeStart = { x: e.clientX, y: e.clientY, t: Date.now() };
+          }
+        } else if (lbPointers.size === 2) {
+          const pts = [...lbPointers.values()];
+          lbPinchStartDist = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y) || 1;
+          lbPinchStartScale = lbScale;
+          lbPinchLastMid = { x: (pts[0].x + pts[1].x) / 2, y: (pts[0].y + pts[1].y) / 2 };
+          lbPanStart = null; lbSwipeStart = null;
+        }
+      });
+
+      img.addEventListener('pointermove', (e) => {
+        if (!lbPointers.has(e.pointerId)) return;
+        lbPointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+        if (lbPointers.size === 1) {
+          if (lbScale > 1 && lbPanStart) {
+            lbX = lbPanStart.ox + (e.clientX - lbPanStart.x);
+            lbY = lbPanStart.oy + (e.clientY - lbPanStart.y);
+            lbApplyTransform();
+          }
+        } else if (lbPointers.size === 2) {
+          const pts = [...lbPointers.values()];
+          const dist = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y) || 1;
+          const mid = { x: (pts[0].x + pts[1].x) / 2, y: (pts[0].y + pts[1].y) / 2 };
+          let ns = lbPinchStartScale * (dist / lbPinchStartDist);
+          ns = Math.min(Math.max(ns, 1), 5);
+          lbScale = ns;
+          if (lbPinchLastMid) {
+            lbX += (mid.x - lbPinchLastMid.x);
+            lbY += (mid.y - lbPinchLastMid.y);
+            lbPinchLastMid = mid;
+          }
+          lbApplyTransform();
+        }
+      });
+
+      function lbEndPointer(e) {
+        if (!lbPointers.has(e.pointerId)) return;
+        lbPointers.delete(e.pointerId);
+        try { img.releasePointerCapture(e.pointerId); } catch (_) {}
+        if (lbPointers.size < 2) { lbPinchStartDist = 0; lbPinchLastMid = null; }
+        if (lbPointers.size === 0) {
+          if (lbSwipeStart && e.pointerType === 'touch') {
+            const dx = e.clientX - lbSwipeStart.x;
+            const dy = e.clientY - lbSwipeStart.y;
+            const dt = Date.now() - lbSwipeStart.t;
+            if (lbScale === 1 && Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5 && dt < 600) {
+              zoomNavigate(dx < 0 ? 1 : -1);
+            }
+          }
+          lbSwipeStart = null;
+          lbPanStart = null;
+        }
+      }
+      img.addEventListener('pointerup', lbEndPointer);
+      img.addEventListener('pointercancel', lbEndPointer);
+
+      img.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        const factor = e.deltaY < 0 ? 1.15 : 0.87;
+        let ns = Math.min(Math.max(lbScale * factor, 1), 5);
+        lbScale = ns;
+        if (lbScale === 1) { lbX = 0; lbY = 0; }
+        lbApplyTransform();
+      }, { passive: false });
+
+      img.addEventListener('dblclick', () => {
+        if (lbScale > 1) { lbResetZoom(); }
+        else { lbScale = 2.2; lbX = 0; lbY = 0; lbApplyTransform(); }
+      });
+
+      // Setas de navegação (ligadas via JS para garantir que o clique não seja bloqueado)
+      const prevNav = document.getElementById('lightboxPrevNav');
+      const nextNav = document.getElementById('lightboxNextNav');
+      if (prevNav) prevNav.addEventListener('click', (e) => { e.stopPropagation(); zoomNavigate(-1); });
+      if (nextNav) nextNav.addEventListener('click', (e) => { e.stopPropagation(); zoomNavigate(1); });
+    })();
 
     function toggleFullscreen() {
       const container = document.getElementById('appContainer');
@@ -3470,13 +3836,7 @@ document.addEventListener('click', (e) => {
       function navigateZoomGallery(direction) {
         const lightbox = document.getElementById('imageLightbox');
         if (lightbox.style.display !== 'flex') return false;
-        const slide = slides[currentSlideIndex];
-        if (!slide.images || slide.images.length <= 1) return false;
-        let idx = currentGalleryIndex + direction;
-        if (idx < 0) idx = 0;
-        if (idx > slide.images.length - 1) idx = slide.images.length - 1;
-        switchGalleryImage(idx); // sincroniza o carrossel principal (imagem + dots)
-        document.getElementById('lightboxImg').src = slide.images[idx];
+        zoomNavigate(direction); // reutiliza a mesma lógica autocontida dos botões visuais
         return true;
       }
 
