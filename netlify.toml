@@ -1,6 +1,6 @@
 [build]
   base = "proposta-licenciamento-cimed"
-  publish = "public"
+  publish = "proposta-licenciamento-cimed/public"
 
 [[headers]]
   for = "/images/*"
