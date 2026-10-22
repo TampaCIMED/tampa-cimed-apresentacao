@@ -12,4 +12,4 @@ Sirva a pasta `public/` com qualquer servidor estático. Não há etapa de compi
 
 ## Publicação
 
-O projeto está preparado para publicação estática no Netlify, usando `public/` como diretório publicado. A conexão com o GitHub e os deploys automáticos da branch `main` devem ser configurados no Netlify.
+O site público está em <https://visionary-bunny-f165f0.netlify.app/>. O Netlify está conectado a este repositório e publica automaticamente as atualizações da branch `main`, usando `public/` como diretório publicado.
