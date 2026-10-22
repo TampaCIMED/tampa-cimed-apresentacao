@@ -12,4 +12,4 @@ Sirva a pasta `public/` com qualquer servidor estático. Não há etapa de compi
 
 ## Publicação
 
-O site público está em <https://visionary-bunny-f165f0.netlify.app/>. O Netlify está conectado a este repositório e publica automaticamente as atualizações da branch `main`, usando `public/` como diretório publicado.
+O site público está em <https://proposta-licenciamento-cimed.netlify.app/>. O Netlify está conectado a este repositório e publica automaticamente as atualizações da branch `main`, usando `public/` como diretório publicado.
