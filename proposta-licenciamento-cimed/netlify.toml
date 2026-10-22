@@ -1,0 +1,7 @@
+[build]
+  publish = "public"
+
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"

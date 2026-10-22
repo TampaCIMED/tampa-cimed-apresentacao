@@ -1,0 +1,13 @@
+# Netlify local state
+.netlify
+
+# Dependencies and generated files
+node_modules/
+dist/
+build/
+
+# Editor and operating-system files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
