@@ -18,24 +18,106 @@
       * { box-sizing: border-box; }
       html, body { margin: 0; min-height: 100%; background: #fff; }
       main { width: 100%; }
-      img {
+      img.desktop {
         display: block;
         width: 100%;
         max-width: 1671px;
         height: auto;
         margin: 0 auto;
       }
-      @media (max-width: 900px) {
+      .mobile { display: none; }
+
+      @media (max-width: 900px) and (orientation: portrait) {
+        img.desktop { display: none; }
+        html, body { height: 100%; }
+        main { height: 100%; }
+        .mobile {
+          position: relative;
+          display: flex;
+          align-items: flex-start;
+          width: 100%;
+          min-height: 100%;
+          min-height: 100dvh;
+          padding: 24px 20px 32px;
+          overflow: hidden;
+          font-family: Helvetica, Arial, sans-serif;
+          color: #111;
+          background: #fff;
+        }
+        .mobile::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: url("/images/proposta-licenciamento-cimed.png") 66% 50% / cover no-repeat;
+          z-index: 0;
+        }
+        .mobile::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background:
+            linear-gradient(180deg, rgba(255,255,255,0.30) 0%, rgba(255,255,255,0.10) 30%, rgba(255,255,255,0.55) 62%, rgba(255,255,255,0.90) 100%),
+            linear-gradient(100deg, rgba(255,255,255,0.94) 0%, rgba(255,255,255,0.92) 52%, rgba(255,255,255,0.55) 74%, rgba(255,255,255,0.12) 92%, rgba(255,255,255,0) 100%);
+          z-index: 1;
+        }
+        .mobile .panel { position: relative; z-index: 2; width: 100%; }
+        .mobile h1 {
+          margin: 0 0 6px;
+          font-size: clamp(21px, 6.4vw, 30px);
+          line-height: 1.14;
+          font-weight: 800;
+          letter-spacing: 0.2px;
+          color: #f0a500;
+          text-shadow: 0 1px 2px rgba(255,255,255,0.8);
+        }
+        .mobile .lead {
+          margin: 0;
+          font-size: clamp(15px, 4.2vw, 19px);
+          line-height: 1.32;
+          font-weight: 700;
+        }
+        .mobile .lead-sub {
+          margin: 2px 0 22px;
+          font-size: clamp(14px, 3.9vw, 17px);
+          line-height: 1.4;
+          color: #1f1f1f;
+        }
+        .mobile section { margin-bottom: 20px; }
+        .mobile h2 {
+          margin: 0 0 4px;
+          font-size: clamp(14px, 3.9vw, 17px);
+          line-height: 1.35;
+          font-weight: 800;
+        }
+        .mobile .value {
+          margin: 0 0 6px;
+          font-size: clamp(26px, 8.4vw, 38px);
+          line-height: 1.08;
+          font-weight: 800;
+        }
+        .mobile p {
+          margin: 0;
+          font-size: clamp(14px, 3.9vw, 17px);
+          line-height: 1.45;
+          color: #1f1f1f;
+        }
+        .mobile .label {
+          margin: 0 0 2px;
+          font-size: clamp(15px, 4.1vw, 18px);
+          font-weight: 700;
+        }
+      }
+
+      @media (max-width: 900px) and (orientation: landscape) {
         html, body { height: 100%; overflow: hidden; }
         main {
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 100%;
           height: 100%;
           height: 100dvh;
         }
-        img {
+        img.desktop {
           width: auto;
           height: auto;
           max-width: 100%;
@@ -48,12 +130,43 @@
   <body>
     <main>
       <img
+        class="desktop"
         src="/images/proposta-licenciamento-cimed.png"
         alt="Proposta de Licenciamento Exclusivo da Tampa Batoque Híbrida CIMED"
         width="1671"
         height="941"
         fetchpriority="high"
       >
+
+      <section class="mobile" aria-label="Proposta de Licenciamento Exclusivo da Tampa Batoque Híbrida CIMED">
+        <div class="panel">
+          <h1>TAMPA BATOQUE HÍBRIDA CIMED</h1>
+          <p class="lead">Proposta de Licenciamento Exclusivo</p>
+          <p class="lead-sub">Proposta comercial dirigida à CIMED.</p>
+
+          <section>
+            <h2>1. INVESTIMENTO INICIAL</h2>
+            <p class="value">R$ 100.000.000,00</p>
+            <p>Pela criação e pelo licenciamento da solução, conforme condições contratuais.</p>
+          </section>
+
+          <section>
+            <h2>2. REMUNERAÇÃO FUTURA</h2>
+            <p class="value">15% de royalties</p>
+            <p>Sobre o faturamento anual bruto dos produtos abrangidos pela licença.</p>
+          </section>
+
+          <section>
+            <p class="label">3. Modalidade</p>
+            <p>Licença exclusiva de uso.</p>
+          </section>
+
+          <section>
+            <p class="label">4. Formalização</p>
+            <p>Condições de exploração, prazo, território, apuração dos royalties e demais obrigações definidos em contrato.</p>
+          </section>
+        </div>
+      </section>
     </main>
   </body>
 </html>
